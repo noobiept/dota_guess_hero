@@ -1,0 +1,19 @@
+body {
+    text-align: center;
+}
+
+#HeroList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.Hero {
+    text-align: center;
+    margin: 10px;
+}
+
+.hidden {
+    display: none;
+}
