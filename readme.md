@@ -6,4 +6,5 @@
 
 # Dependencies #
 
-- typescript `1.8`
+- [typescript](https://www.typescriptlang.org/) `1.8`
+- [utilities](https://bitbucket.org/drk4/javascript_utilities) `1.8`
