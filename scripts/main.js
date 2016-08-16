@@ -1,21 +1,15 @@
+/// <reference path="../libraries/utilities.1.8.0.d.ts" />
 var HEROES = [
-    { name: 'Abaddon', image: 'abaddon_sb.png' },
-    { name: 'Alchemist', image: 'alchemist_sb.png' },
-    { name: 'Ancient Apparition', image: 'ancient_apparition_sb.png' },
-    { name: 'Anti-Mage', image: 'antimage_sb.png' },
-    { name: 'Arc Warden', image: 'arc_warden_sb.png' },
-    { name: 'Axe', image: 'axe_sb.png' },
-    { name: 'Bane', image: 'bane_sb.png' },
-    { name: 'Batrider', image: 'batrider_sb.png' },
-    { name: 'Beastmaster', image: 'beastmaster_sb.png' },
-    { name: 'Bloodseeker', image: 'bloodseeker_sb.png' },
-    { name: 'Bounty Hunter', image: 'bounty_hunter_sb.png' },
-    { name: 'Bristleback', image: 'bristleback_sb.png' },
-    { name: 'Broodmother', image: 'broodmother_sb.png' },
+    { name: 'Abaddon', image: 'abaddon_sb.png', sounds: ['https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/b4/Abad_begin_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/bd/Abad_begin_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/fc/Abad_move_11.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/dc/Abad_attack_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/fe/Abad_cast_02.mp3'] },
+    { name: 'Alchemist', image: 'alchemist_sb.png', sounds: ['https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/0c/Alch_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/b2/Alch_battlebegins_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/98/Alch_move_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/b5/Alch_move_14.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/02/Alch_attack_03.mp3'] },
 ];
 var HERO_LIST;
+var AUDIO;
+var HEROES_LEFT;
+var CURRENT_HERO;
 window.onload = function () {
     HERO_LIST = document.getElementById('HeroList');
+    AUDIO = document.getElementById('Audio');
     // build the hero list
     for (var a = 0; a < HEROES.length; a++) {
         var hero = HEROES[a];
@@ -32,6 +26,7 @@ window.onload = function () {
     }
     var input = document.getElementById('Search');
     input.oninput = search;
+    start();
 };
 function search(event) {
     var value = event.target.value;
@@ -46,4 +41,14 @@ function search(event) {
             element.classList.add('hidden');
         }
     }
+}
+function start() {
+    HEROES_LEFT = HEROES.concat();
+    getNextHero();
+}
+function getNextHero() {
+    var position = Utilities.getRandomInt(0, HEROES_LEFT.length - 1);
+    CURRENT_HERO = HEROES_LEFT.splice(position, 1)[0];
+    AUDIO.src = CURRENT_HERO.sounds[0];
+    AUDIO.play();
 }

@@ -1,25 +1,38 @@
-var HEROES = [
-    { name: 'Abaddon', image: 'abaddon_sb.png' },
-    { name: 'Alchemist', image: 'alchemist_sb.png' },
-    { name: 'Ancient Apparition', image: 'ancient_apparition_sb.png' },
+/// <reference path="../libraries/utilities.1.8.0.d.ts" />
+
+interface Hero {
+    name: string;
+    image: string;
+    sounds: string[];
+}
+
+
+var HEROES: Hero[] = [
+    { name: 'Abaddon', image: 'abaddon_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/b4/Abad_begin_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/bd/Abad_begin_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/fc/Abad_move_11.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/dc/Abad_attack_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/fe/Abad_cast_02.mp3' ] },
+    { name: 'Alchemist', image: 'alchemist_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/0c/Alch_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/b2/Alch_battlebegins_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/98/Alch_move_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/b5/Alch_move_14.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/02/Alch_attack_03.mp3' ] },
+    /*{ name: 'Ancient Apparition', image: 'ancient_apparition_sb.png' },
     { name: 'Anti-Mage', image: 'antimage_sb.png' },
     { name: 'Arc Warden', image: 'arc_warden_sb.png' },
     { name: 'Axe', image: 'axe_sb.png' },
 
     { name: 'Bane', image: 'bane_sb.png' },
-    { name: 'Batrider', image: 'batrider_sb.png' },
+    { name: 'Batrider', image: 'batrider_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/9e/Bat_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/b0/Bat_battlebegins_02.mp3' ] },
     { name: 'Beastmaster', image: 'beastmaster_sb.png' },
     { name: 'Bloodseeker', image: 'bloodseeker_sb.png' },
     { name: 'Bounty Hunter', image: 'bounty_hunter_sb.png' },
     { name: 'Bristleback', image: 'bristleback_sb.png' },
-    { name: 'Broodmother', image: 'broodmother_sb.png' },
+    { name: 'Broodmother', image: 'broodmother_sb.png' },*/
 ];
 var HERO_LIST: HTMLElement;
+var AUDIO: HTMLAudioElement;
+var HEROES_LEFT: Hero[];
+var CURRENT_HERO: Hero;
 
 
 window.onload = function()
 {
 HERO_LIST = document.getElementById( 'HeroList' );
+AUDIO = <HTMLAudioElement> document.getElementById( 'Audio' );
 
     // build the hero list
 for (var a = 0 ; a < HEROES.length ; a++)
@@ -43,6 +56,8 @@ for (var a = 0 ; a < HEROES.length ; a++)
 
 var input = document.getElementById( 'Search' );
 input.oninput = search;
+
+start();
 };
 
 
@@ -69,3 +84,19 @@ for (var a = 0 ; a < listElements.length ; a++)
     }
 }
 
+
+function start()
+{
+HEROES_LEFT = HEROES.concat();
+getNextHero();
+}
+
+
+function getNextHero()
+{
+var position = Utilities.getRandomInt( 0, HEROES_LEFT.length - 1 );
+
+CURRENT_HERO = HEROES_LEFT.splice( position, 1 )[ 0 ];
+AUDIO.src = CURRENT_HERO.sounds[ 0 ];
+AUDIO.play();
+}
