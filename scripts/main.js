@@ -12,24 +12,35 @@ window.onload = function () {
     AUDIO = document.getElementById('Audio');
     // build the hero list
     for (var a = 0; a < HEROES.length; a++) {
-        var hero = HEROES[a];
-        var figure = document.createElement('figure');
-        figure.className = 'Hero';
-        figure.setAttribute('data-name', hero.name);
-        var figcaption = document.createElement('figcaption');
-        figcaption.innerText = hero.name;
-        var img = document.createElement('img');
-        img.src = 'http://cdn.dota2.com/apps/dota2/images/heroes/' + hero.image;
-        figure.appendChild(figcaption);
-        figure.appendChild(img);
-        HERO_LIST.appendChild(figure);
+        HERO_LIST.appendChild(addListItem(HEROES[a]));
     }
     var input = document.getElementById('Search');
-    input.oninput = search;
+    input.onkeyup = search;
     start();
 };
+function addListItem(hero) {
+    var figure = document.createElement('figure');
+    figure.className = 'Hero';
+    figure.setAttribute('data-name', hero.name);
+    figure.onclick = function () {
+        guess(hero.name);
+    };
+    var figcaption = document.createElement('figcaption');
+    figcaption.innerText = hero.name;
+    var img = document.createElement('img');
+    img.src = 'http://cdn.dota2.com/apps/dota2/images/heroes/' + hero.image;
+    figure.appendChild(figcaption);
+    figure.appendChild(img);
+    return figure;
+}
 function search(event) {
+    var key = event.keyCode;
     var value = event.target.value;
+    // try to guess the first hero
+    if (key === Utilities.KEY_CODE.enter) {
+        var first = HERO_LIST.querySelector('.Hero:not(.hidden)');
+        guess(first.getAttribute('data-name'));
+    }
     var re = new RegExp(value, 'i');
     var listElements = HERO_LIST.children;
     for (var a = 0; a < listElements.length; a++) {
@@ -47,8 +58,23 @@ function start() {
     getNextHero();
 }
 function getNextHero() {
+    if (HEROES_LEFT.length === 0) {
+        return false;
+    }
     var position = Utilities.getRandomInt(0, HEROES_LEFT.length - 1);
     CURRENT_HERO = HEROES_LEFT.splice(position, 1)[0];
     AUDIO.src = CURRENT_HERO.sounds[0];
     AUDIO.play();
+    return true;
+}
+function guess(heroName) {
+    if (heroName === CURRENT_HERO.name) {
+        if (!getNextHero()) {
+            console.log('Game Over! Restarting..');
+            start();
+        }
+    }
+    else {
+        console.log('Incorrect :(');
+    }
 }
