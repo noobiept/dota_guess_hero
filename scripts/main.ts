@@ -25,6 +25,8 @@ var HEROES: Hero[] = [
 ];
 var HERO_LIST: HTMLElement;
 var AUDIO: HTMLAudioElement;
+var INPUT: HTMLInputElement;
+
 var HEROES_LEFT: Hero[];
 var CURRENT_HERO: Hero;
 
@@ -33,6 +35,7 @@ window.onload = function()
 {
 HERO_LIST = document.getElementById( 'HeroList' );
 AUDIO = <HTMLAudioElement> document.getElementById( 'Audio' );
+INPUT = <HTMLInputElement> document.getElementById( 'Search' );
 
     // build the hero list
 for (var a = 0 ; a < HEROES.length ; a++)
@@ -40,8 +43,7 @@ for (var a = 0 ; a < HEROES.length ; a++)
     HERO_LIST.appendChild( addListItem( HEROES[ a ] ) );
     }
 
-var input = document.getElementById( 'Search' );
-input.onkeyup = search;
+INPUT.onkeyup = search;
 
 Dialog.init();
 start();
@@ -80,7 +82,12 @@ var value = (<HTMLInputElement> event.target).value;
 if ( key === Utilities.KEY_CODE.enter )
     {
     var first = HERO_LIST.querySelector( '.Hero:not(.hidden)' );
-    guess( first.getAttribute( 'data-name' ) );
+    if ( first )
+        {
+        guess( first.getAttribute( 'data-name' ) );
+        }
+
+    return;
     }
 
 var re = new RegExp( value, 'i' );
@@ -107,6 +114,8 @@ function start()
 {
 HEROES_LEFT = HEROES.concat();
 getNextHero();
+
+INPUT.focus();
 }
 
 
@@ -145,9 +154,12 @@ function guess( heroName: string )
 {
 if ( heroName === CURRENT_HERO.name )
     {
+    resetList();
+
     if ( !getNextHero() )
         {
         AUDIO.pause();
+        INPUT.blur();
 
         Dialog.open( 'Game Over! Score: ---', start )
         }
@@ -156,5 +168,24 @@ if ( heroName === CURRENT_HERO.name )
 else
     {
     console.log( 'Incorrect :(' );
+    }
+}
+
+
+function resetList()
+{
+if ( INPUT.value === '' )
+    {
+    return;
+    }
+
+INPUT.value = '';
+INPUT.focus();
+
+var listElements = HERO_LIST.children;
+
+for (var a = 0 ; a < listElements.length ; a++)
+    {
+    listElements[ a ].classList.remove( 'hidden' );
     }
 }

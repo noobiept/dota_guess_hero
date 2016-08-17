@@ -11,6 +11,7 @@ body {
     border-style:solid;
     border-width: 3px;
     border-color: transparent;
+    cursor: pointer;
 }
 
 .hidden {

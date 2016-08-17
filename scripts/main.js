@@ -16,17 +16,18 @@ var HEROES = [
 ];
 var HERO_LIST;
 var AUDIO;
+var INPUT;
 var HEROES_LEFT;
 var CURRENT_HERO;
 window.onload = function () {
     HERO_LIST = document.getElementById('HeroList');
     AUDIO = document.getElementById('Audio');
+    INPUT = document.getElementById('Search');
     // build the hero list
     for (var a = 0; a < HEROES.length; a++) {
         HERO_LIST.appendChild(addListItem(HEROES[a]));
     }
-    var input = document.getElementById('Search');
-    input.onkeyup = search;
+    INPUT.onkeyup = search;
     Dialog.init();
     start();
 };
@@ -51,7 +52,10 @@ function search(event) {
     // try to guess the first hero
     if (key === Utilities.KEY_CODE.enter) {
         var first = HERO_LIST.querySelector('.Hero:not(.hidden)');
-        guess(first.getAttribute('data-name'));
+        if (first) {
+            guess(first.getAttribute('data-name'));
+        }
+        return;
     }
     var re = new RegExp(value, 'i');
     var listElements = HERO_LIST.children;
@@ -68,6 +72,7 @@ function search(event) {
 function start() {
     HEROES_LEFT = HEROES.concat();
     getNextHero();
+    INPUT.focus();
 }
 function getNextHero() {
     if (HEROES_LEFT.length === 0) {
@@ -91,12 +96,25 @@ function getNextHero() {
 }
 function guess(heroName) {
     if (heroName === CURRENT_HERO.name) {
+        resetList();
         if (!getNextHero()) {
             AUDIO.pause();
+            INPUT.blur();
             Dialog.open('Game Over! Score: ---', start);
         }
     }
     else {
         console.log('Incorrect :(');
+    }
+}
+function resetList() {
+    if (INPUT.value === '') {
+        return;
+    }
+    INPUT.value = '';
+    INPUT.focus();
+    var listElements = HERO_LIST.children;
+    for (var a = 0; a < listElements.length; a++) {
+        listElements[a].classList.remove('hidden');
     }
 }
