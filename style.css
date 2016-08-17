@@ -1,5 +1,7 @@
 body {
     text-align: center;
+    color: #939393;
+    background-color: #232425;
 }
 
 #HeroList {
@@ -12,8 +14,16 @@ body {
 .Hero {
     text-align: center;
     margin: 10px;
+    padding: 2px;
+    border-style:solid;
+    border-width: 3px;
+    border-color: transparent;
 }
 
 .hidden {
     display: none;
+}
+
+.highlight, .Hero:hover {
+    border-color: white;
 }
