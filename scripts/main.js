@@ -72,9 +72,19 @@ function getNextHero() {
     if (HEROES_LEFT.length === 0) {
         return false;
     }
-    var position = Utilities.getRandomInt(0, HEROES_LEFT.length - 1);
-    CURRENT_HERO = HEROES_LEFT.splice(position, 1)[0];
-    AUDIO.src = CURRENT_HERO.sounds[0];
+    var heroPosition = Utilities.getRandomInt(0, HEROES_LEFT.length - 1);
+    var soundPosition = 0;
+    CURRENT_HERO = HEROES_LEFT.splice(heroPosition, 1)[0];
+    AUDIO.src = CURRENT_HERO.sounds[soundPosition];
+    AUDIO.onended = function () {
+        soundPosition++;
+        // play the sounds continously
+        if (soundPosition >= CURRENT_HERO.sounds.length) {
+            soundPosition = 0;
+        }
+        AUDIO.src = CURRENT_HERO.sounds[soundPosition];
+        AUDIO.play();
+    };
     AUDIO.play();
     return true;
 }
