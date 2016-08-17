@@ -4,13 +4,6 @@ body {
     background-color: #232425;
 }
 
-#HeroList {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 .Hero {
     text-align: center;
     margin: 10px;
@@ -26,4 +19,30 @@ body {
 
 .highlight, .Hero:hover {
     border-color: white;
+}
+
+#HeroList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#Dialog {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#DialogOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba( 0, 0, 0, 0.5 );
+    width: 100%;
+    height: 100%;
 }

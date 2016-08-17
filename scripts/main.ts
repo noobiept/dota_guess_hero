@@ -43,6 +43,7 @@ for (var a = 0 ; a < HEROES.length ; a++)
 var input = document.getElementById( 'Search' );
 input.onkeyup = search;
 
+Dialog.init();
 start();
 };
 
@@ -146,8 +147,9 @@ if ( heroName === CURRENT_HERO.name )
     {
     if ( !getNextHero() )
         {
-        console.log( 'Game Over! Restarting..' );
-        start();
+        AUDIO.pause();
+
+        Dialog.open( 'Game Over! Score: ---', start )
         }
     }
 

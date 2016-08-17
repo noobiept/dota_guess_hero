@@ -27,6 +27,7 @@ window.onload = function () {
     }
     var input = document.getElementById('Search');
     input.onkeyup = search;
+    Dialog.init();
     start();
 };
 function addListItem(hero) {
@@ -91,8 +92,8 @@ function getNextHero() {
 function guess(heroName) {
     if (heroName === CURRENT_HERO.name) {
         if (!getNextHero()) {
-            console.log('Game Over! Restarting..');
-            start();
+            AUDIO.pause();
+            Dialog.open('Game Over! Score: ---', start);
         }
     }
     else {
