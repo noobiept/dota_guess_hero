@@ -14,12 +14,16 @@ body {
     cursor: pointer;
 }
 
+.Hero:hover {
+    border-color: white;
+}
+
 .hidden {
     display: none;
 }
 
-.highlight, .Hero:hover {
-    border-color: white;
+.noOpacity {
+    opacity: 0;
 }
 
 #HeroList {
@@ -46,4 +50,9 @@ body {
     background-color: rgba( 0, 0, 0, 0.5 );
     width: 100%;
     height: 100%;
+}
+
+#Message {
+    transition: opacity 0.3s;
+    font-size: 150%;
 }

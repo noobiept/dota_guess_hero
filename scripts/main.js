@@ -20,6 +20,7 @@ var Main;
         AUDIO.volume = 0.5;
         INPUT.onkeyup = search;
         Dialog.init();
+        Message.init();
         start();
     }
     Main.init = init;
@@ -88,6 +89,7 @@ var Main;
     }
     function guess(heroName) {
         if (heroName === CURRENT_HERO.name) {
+            Message.show('Correct!');
             resetList();
             if (!getNextHero()) {
                 AUDIO.pause();
@@ -96,7 +98,7 @@ var Main;
             }
         }
         else {
-            console.log('Incorrect :(');
+            Message.show('Incorrect :(');
         }
     }
     function resetList() {

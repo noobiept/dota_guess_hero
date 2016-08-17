@@ -33,6 +33,7 @@ export function init()
     INPUT.onkeyup = search;
 
     Dialog.init();
+    Message.init();
     start();
     }
 
@@ -141,6 +142,7 @@ function guess( heroName: string )
     {
     if ( heroName === CURRENT_HERO.name )
         {
+        Message.show( 'Correct!' );
         resetList();
 
         if ( !getNextHero() )
@@ -154,7 +156,7 @@ function guess( heroName: string )
 
     else
         {
-        console.log( 'Incorrect :(' );
+        Message.show( 'Incorrect :(' );
         }
     }
 
