@@ -29,7 +29,7 @@ var Main;
         figure.className = 'Hero';
         figure.setAttribute('data-name', hero.name);
         figure.onclick = function () {
-            guess(hero.name);
+            guess(figure);
         };
         var figcaption = document.createElement('figcaption');
         figcaption.innerText = hero.name;
@@ -46,7 +46,7 @@ var Main;
         if (key === Utilities.KEY_CODE.enter) {
             var first = HERO_LIST.querySelector('.Hero:not(.hidden)');
             if (first) {
-                guess(first.getAttribute('data-name'));
+                guess(first);
             }
             return;
         }
@@ -54,7 +54,8 @@ var Main;
         var listElements = HERO_LIST.children;
         for (var a = 0; a < listElements.length; a++) {
             var element = listElements[a];
-            if (re.test(element.getAttribute('data-name'))) {
+            if (!element.hasAttribute('data-already-selected') &&
+                re.test(element.getAttribute('data-name'))) {
                 element.classList.remove('hidden');
             }
             else {
@@ -66,6 +67,12 @@ var Main;
         HEROES_LEFT = HEROES.concat();
         getNextHero();
         INPUT.focus();
+        // reset the selected heroes property from all list elements
+        var listElements = HERO_LIST.children;
+        for (var a = 0; a < listElements.length; a++) {
+            listElements[a].removeAttribute('data-already-selected');
+        }
+        resetList();
     }
     function getNextHero() {
         if (HEROES_LEFT.length === 0) {
@@ -88,8 +95,11 @@ var Main;
         AUDIO.play();
         return true;
     }
-    function guess(heroName) {
+    function guess(element) {
+        var heroName = element.getAttribute('data-name');
         if (heroName === CURRENT_HERO.name) {
+            // mark this element has already selected, so it doesn't show on the list anymore
+            element.setAttribute('data-already-selected', '');
             Message.show('Correct!');
             resetList();
             if (!getNextHero()) {
@@ -103,14 +113,18 @@ var Main;
         }
     }
     function resetList() {
-        if (INPUT.value === '') {
-            return;
-        }
         INPUT.value = '';
         INPUT.focus();
         var listElements = HERO_LIST.children;
         for (var a = 0; a < listElements.length; a++) {
-            listElements[a].classList.remove('hidden');
+            var element = listElements[a];
+            // don't show the heroes that have already been selected
+            if (element.hasAttribute('data-already-selected')) {
+                element.classList.add('hidden');
+            }
+            else {
+                element.classList.remove('hidden');
+            }
         }
     }
 })(Main || (Main = {}));

@@ -45,7 +45,7 @@ function addListItem( hero: Hero )
     figure.setAttribute( 'data-name', hero.name );
     figure.onclick = function()
         {
-        guess( hero.name );
+        guess( figure );
         };
 
     var figcaption = document.createElement( 'figcaption' );
@@ -69,10 +69,10 @@ function search( event: KeyboardEvent )
         // try to guess the first hero
     if ( key === Utilities.KEY_CODE.enter )
         {
-        var first = HERO_LIST.querySelector( '.Hero:not(.hidden)' );
+        var first = <HTMLElement> HERO_LIST.querySelector( '.Hero:not(.hidden)' );
         if ( first )
             {
-            guess( first.getAttribute( 'data-name' ) );
+            guess( first );
             }
 
         return;
@@ -85,7 +85,8 @@ function search( event: KeyboardEvent )
         {
         var element = listElements[ a ];
 
-        if ( re.test( element.getAttribute( 'data-name' ) ) )
+        if ( !element.hasAttribute( 'data-already-selected' ) &&
+             re.test( element.getAttribute( 'data-name' ) ) )
             {
             element.classList.remove( 'hidden' );
             }
@@ -104,6 +105,16 @@ function start()
     getNextHero();
 
     INPUT.focus();
+
+        // reset the selected heroes property from all list elements
+    var listElements = HERO_LIST.children;
+
+    for (var a = 0 ; a < listElements.length ; a++)
+        {
+        listElements[ a ].removeAttribute( 'data-already-selected' );
+        }
+
+    resetList();
     }
 
 
@@ -140,10 +151,15 @@ function getNextHero()
     }
 
 
-function guess( heroName: string )
+function guess( element: HTMLElement )
     {
+    var heroName = element.getAttribute( 'data-name' );
+
     if ( heroName === CURRENT_HERO.name )
         {
+            // mark this element has already selected, so it doesn't show on the list anymore
+        element.setAttribute( 'data-already-selected', '' );
+
         Message.show( 'Correct!' );
         resetList();
 
@@ -165,11 +181,6 @@ function guess( heroName: string )
 
 function resetList()
     {
-    if ( INPUT.value === '' )
-        {
-        return;
-        }
-
     INPUT.value = '';
     INPUT.focus();
 
@@ -177,7 +188,18 @@ function resetList()
 
     for (var a = 0 ; a < listElements.length ; a++)
         {
-        listElements[ a ].classList.remove( 'hidden' );
+        var element = listElements[ a ];
+
+            // don't show the heroes that have already been selected
+        if ( element.hasAttribute( 'data-already-selected' ) )
+            {
+            element.classList.add( 'hidden' );
+            }
+
+        else
+            {
+            element.classList.remove( 'hidden' );
+            }
         }
     }
 }
