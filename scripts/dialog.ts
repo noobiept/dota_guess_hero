@@ -12,6 +12,7 @@ export function init()
     CONTAINER = document.getElementById( 'Dialog' );
     MESSAGE = document.getElementById( 'DialogMessage' );
     OVERLAY = document.getElementById( 'DialogOverlay' );
+    OVERLAY.onclick = close;
 
     var ok = document.getElementById( 'DialogOk' );
     ok.onclick = close;

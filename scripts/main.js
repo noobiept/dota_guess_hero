@@ -8,12 +8,15 @@ var Main;
     var AUDIO;
     var INPUT;
     var CORRECT_SOUND;
+    var INCORRECT_ELEMENT;
     var HEROES_LEFT;
     var CURRENT_HERO;
+    var INCORRECT_GUESSES = 0;
     function init() {
         HERO_LIST = document.getElementById('HeroList');
         AUDIO = document.getElementById('Audio');
         INPUT = document.getElementById('Search');
+        INCORRECT_ELEMENT = document.getElementById('Incorrect');
         CORRECT_SOUND = new Audio('sounds/coins.mp3');
         CORRECT_SOUND.volume = 0.5;
         // build the hero list
@@ -67,6 +70,8 @@ var Main;
         }
     }
     function start() {
+        INCORRECT_GUESSES = 0;
+        updateGuessCount();
         HEROES_LEFT = HEROES.concat();
         getNextHero();
         INPUT.focus();
@@ -93,9 +98,10 @@ var Main;
                 soundPosition = 0;
             }
             AUDIO.src = CURRENT_HERO.sounds[soundPosition];
+        };
+        AUDIO.oncanplay = function () {
             AUDIO.play();
         };
-        AUDIO.play();
         return true;
     }
     function guess(element) {
@@ -110,10 +116,12 @@ var Main;
             if (!getNextHero()) {
                 AUDIO.pause();
                 INPUT.blur();
-                Dialog.open('Game Over! Score: ---', start);
+                Dialog.open(endGameMessage(), start);
             }
         }
         else {
+            INCORRECT_GUESSES++;
+            updateGuessCount();
             Message.show('Incorrect :(');
         }
     }
@@ -131,5 +139,18 @@ var Main;
                 element.classList.remove('hidden');
             }
         }
+    }
+    function updateGuessCount() {
+        INCORRECT_ELEMENT.innerHTML = INCORRECT_GUESSES.toString();
+    }
+    function endGameMessage() {
+        var message = "Game Over!<br />";
+        if (INCORRECT_GUESSES === 0) {
+            message += 'Perfect!';
+        }
+        else {
+            message += "You've guessed incorrectly " + INCORRECT_GUESSES + " times.";
+        }
+        return message;
     }
 })(Main || (Main = {}));
