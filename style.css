@@ -12,6 +12,7 @@ body {
     border-width: 3px;
     border-color: transparent;
     cursor: pointer;
+    transition: border 0.3s;
 }
 
 .Hero:hover {

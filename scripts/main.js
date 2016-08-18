@@ -72,8 +72,9 @@ var Main;
             return false;
         }
         var heroPosition = Utilities.getRandomInt(0, HEROES_LEFT.length - 1);
-        var soundPosition = 0;
         CURRENT_HERO = HEROES_LEFT.splice(heroPosition, 1)[0];
+        // have a random starting position, so that it doesn't always play the same order
+        var soundPosition = Utilities.getRandomInt(0, CURRENT_HERO.sounds.length - 1);
         AUDIO.src = CURRENT_HERO.sounds[soundPosition];
         AUDIO.onended = function () {
             soundPosition++;
