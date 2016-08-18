@@ -7,12 +7,15 @@ var Main;
     var HERO_LIST;
     var AUDIO;
     var INPUT;
+    var CORRECT_SOUND;
     var HEROES_LEFT;
     var CURRENT_HERO;
     function init() {
         HERO_LIST = document.getElementById('HeroList');
         AUDIO = document.getElementById('Audio');
         INPUT = document.getElementById('Search');
+        CORRECT_SOUND = new Audio('sounds/coins.mp3');
+        CORRECT_SOUND.volume = 0.5;
         // build the hero list
         for (var a = 0; a < HEROES.length; a++) {
             HERO_LIST.appendChild(addListItem(HEROES[a]));
@@ -100,6 +103,8 @@ var Main;
         if (heroName === CURRENT_HERO.name) {
             // mark this element has already selected, so it doesn't show on the list anymore
             element.setAttribute('data-already-selected', '');
+            CORRECT_SOUND.currentTime = 0;
+            CORRECT_SOUND.play();
             Message.show('Correct!');
             resetList();
             if (!getNextHero()) {
