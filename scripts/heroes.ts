@@ -27,4 +27,116 @@ var HEROES: Hero[] = [
     { name: 'Clinkz', image: 'clinkz_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d1/Clinkz_battlebegins_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/de/Clinkz_move_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/51/Clinkz_move_08.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/e0/Clinkz_attack_09.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/bf/Clinkz_kill_04.mp3' ] },
     { name: 'Clockwerk', image: 'rattletrap_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/89/Ratt_move_22.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/80/Ratt_move_14.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/04/Ratt_move_23.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/dd/Ratt_attack_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/57/Ratt_ability_flare_06.mp3' ] },
     { name: 'Crystal Maiden', image: 'crystal_maiden_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/4/45/Cm_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/be/Cm_move_06.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d2/Cm_move_13.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/e6/Cm_levelup_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/85/Cm_attack_04.mp3' ] },
+
+    { name: 'Dark Seer', image: 'dark_seer_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/91/Dkseer_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/8e/Dkseer_move_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/72/Dkseer_move_10.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/85/Dkseer_attack_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/f7/Dkseer_level_06.mp3' ] },
+    { name: 'Dazzle', image: 'dazzle_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/c/c3/Dazz_move_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/8f/Dazz_move_07.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/39/Dazz_attack_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/9c/Dazz_ability_shalgrave_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/bd/Dazz_notyet_03.mp3' ] },
+    { name: 'Death Prophet', image: 'death_prophet_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/2b/Dpro_begin_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/6/69/Dpro_move_04.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/f9/Dpro_attack_04.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/8b/Dpro_exorcism_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/08/Dpro_levelup_03.mp3' ] },
+    { name: 'Disruptor', image: 'disruptor_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/1/12/Dis_begin_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/55/Dis_move_04.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/f9/Dis_attack_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/38/Dis_thunderstrike_04.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/fe/Dis_levelup_02.mp3' ] },
+    { name: 'Doom', image: 'doom_bringer_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/eb/Doom_battlebegins_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/5b/Doom_move_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/52/Doom_move_10.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/a/a1/Doom_attack_09.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/52/Doom_level_06.mp3' ] },
+    { name: 'Dragon Knight', image: 'dragon_knight_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/4/48/DK_drag_spawn_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/4/43/DK_drag_move_04.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/1/11/DK_drag_attack_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/3b/DK_drag_level_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/fa/DK_drag_kill_01.mp3' ] },
+    { name: 'Drow Ranger', image: 'drow_ranger_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/71/Drow_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/e8/Dro_move_06.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/39/Dro_attack_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/b6/Dro_respawn_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/5b/Dro_move_07.mp3' ] },
+
+    { name: 'Earth Spirit', image: 'earth_spirit_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/3c/Earthspi_spawn_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/72/Earthspi_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/f8/Earthspi_move_17.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/83/Earthspi_move_22.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/32/Earthspi_levelup_05.mp3' ] },
+    { name: 'Earthshaker', image: 'earthshaker_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/30/Erth_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/1/19/Erth_move_09.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/73/Erth_ability_echo_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/09/Erth_level_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/e1/Erth_move_06.mp3' ] },
+    { name: 'Elder Titan', image: 'elder_titan_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/e8/Elder_spawn_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/6/61/Elder_battlebegins_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/55/Elder_move_09.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/04/Elder_attack_04.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/4/44/Elder_ancestralspirit_03.mp3' ] },
+    { name: 'Ember Spirit', image: 'ember_spirit_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/6/65/Embr_spawn_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/88/Embr_move_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/27/Embr_move_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/4/41/Embr_move_11.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/a/ad/Embr_searingchains_02.mp3' ] },
+    { name: 'Enchantress', image: 'enchantress_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/70/Ench_start_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/f1/Ench_spawn_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/4/42/Ench_move_12.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/5e/Ench_move_20.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/9f/Ench_attack_05.mp3' ] },
+    { name: 'Enigma', image: 'enigma_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/78/Enig_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/2f/Enig_move_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/de/Enig_move_13.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/7b/Enig_ability_black_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/fb/Enig_level_03.mp3' ] },
+
+    { name: 'Faceless Void', image: 'faceless_void_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/96/Face_cast_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/53/Face_move_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/e4/Face_move_09.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/bc/Face_attack_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/8b/Face_ability_chronos_03.mp3' ] },
+
+    { name: 'Gyrocopter', image: 'gyrocopter_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/c/cc/Gyro_spawn_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/29/Gyro_move_08.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/0e/Gyro_move_17.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/a/a0/Gyro_move_25.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/51/Gyro_homing_missile_fire_02.mp3' ] },
+
+    { name: 'Huskar', image: 'huskar_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d9/Husk_spawn_04.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/fb/Husk_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/e3/Husk_move_14.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/38/Husk_attack_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/82/Husk_level_04.mp3' ] },
+
+    { name: 'Invoker', image: 'invoker_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/09/Invo_begin_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/db/Invo_level_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/2a/Invo_move_18.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/92/Invo_attack_06.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/b6/Invo_ability_invoke_01.mp3' ] },
+    { name: 'Io', image: 'wisp_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d2/Wisp_Battlebegins.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/5f/Wisp_Move02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/01/Wisp_Attack.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/ff/Wisp_Levelup.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/ba/Wisp_Death.mp3' ] },
+
+    { name: 'Jakiro', image: 'jakiro_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/c/c1/Jak_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d8/Jak_move_10.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/97/Jak_attack_08.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/a/ac/Jak_level_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/1/1e/Jak_kill_04.mp3' ] },
+    { name: 'Juggernaut', image: 'juggernaut_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/22/Jug_cast_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/37/Jug_move_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/28/Jug_attack_08.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/ec/Jug_ability_bladefury_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d4/Jug_level_04.mp3' ] },
+
+    { name: 'Keeper of the Light', image: 'keeper_of_the_light_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/b9/Keep_begin_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/6/6a/Keep_move_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/6/6d/Keep_move_18.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/f1/Keep_attack_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/ba/Keep_chakramagic_03.mp3' ] },
+    { name: 'Kunkka', image: 'kunkka_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/f2/Kunk_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/6/62/Kunk_move_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d4/Kunk_attack_04.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/9f/Kunk_ability_xmark_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/71/Kunk_ability_ghostshp_03.mp3' ] },
+
+    { name: 'Legion Commander', image: 'legion_commander_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/27/Legcom_begin_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/e0/Legcom_move_06.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/bd/Legcom_move_15.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/74/Legcom_duelfailure_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/ff/Legcom_levelup_01.mp3' ] },
+    { name: 'Leshrac', image: 'leshrac_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/da/Lesh_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/35/Lesh_move_09.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/9d/Lesh_attack_09.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/22/Lesh_ability_edict_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d0/Lesh_level_03.mp3' ] },
+    { name: 'Lich', image: 'lich_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/05/Lich_rare_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d5/Lich_move_12.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/6/60/Lich_move_17.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/50/Lich_ability_nova_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/e0/Lich_ability_ritual_01.mp3' ] },
+    { name: 'Lifestealer', image: 'life_stealer_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/2e/Lifest_begin_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/53/Lifest_move_10.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/5a/Lifest_attack_07.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/79/Lifest_levelup_06.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/a/ac/Lifest_death_06.mp3' ] },
+    { name: 'Lina', image: 'lina_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/fb/Lina_spawn_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/be/Lina_move_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/87/Lina_move_07.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/bb/Lina_attack_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/a/ac/Lina_level_01.mp3' ] },
+    { name: 'Lion', image: 'lion_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/6/6f/Lion_move_10.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/f/fb/Lion_level_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d0/Lion_kill_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/d/d3/Lion_lasthit_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/4/4a/Lion_respawn_01.mp3' ] },
+    { name: 'Lone Druid', image: 'lone_druid_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/b/ba/Lone_druid_move_13.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/53/Lone_druid_attack_03.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/7/79/Lone_druid_attack_10.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/1/19/Lone_druid_ability_spiritbear_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/04/Lone_druid_level_02.mp3' ] },
+    { name: 'Luna', image: 'luna_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/0/02/Luna_battlebegins_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/8/86/Luna_move_13.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/6/6e/Luna_attack_15.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/4/44/Luna_ability_lucentbeam_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/3c/Luna_levelup_01.mp3' ] },
+    { name: 'Lycan', image: 'lycan_sb.png', sounds: [ 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/9/9a/Lycan_battlebegins_02.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/a/ad/Lycan_move_13.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/2/2c/Lycan_attack_05.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/e/e7/Lycan_level_01.mp3', 'https://hydra-media.cursecdn.com/dota2.gamepedia.com/3/32/Lycan_kill_07.mp3' ] },
+/*
+    { name: 'Magnus', image: 'magnus_sb.png', sounds: [  ] },
+    { name: 'Medusa', image: 'medusa_sb.png', sounds: [  ] },
+    { name: 'Meepo', image: 'meepo_sb.png', sounds: [  ] },
+    { name: 'Mirana', image: 'mirana_sb.png', sounds: [  ] },
+    { name: 'Morphling', image: 'morphling_sb.png', sounds: [  ] },
+
+    { name: 'Naga Siren', image: 'naga_siren_sb.png', sounds: [  ] },
+    { name: "Nature's Prophet", image: 'natures_prophet_sb.png', sounds: [  ] },
+    { name: 'Necrophos', image: 'necrophos_sb.png', sounds: [  ] },
+    { name: 'Night Stalker', image: 'night_stalker_sb.png', sounds: [  ] },
+    { name: 'Nyx Assassin', image: 'nyx_assasin_sb.png', sounds: [  ] },
+
+    { name: 'Ogre Magi', image: 'ogre_magi_sb.png', sounds: [  ] },
+    { name: 'Omniknight', image: 'omniknight_sb.png', sounds: [  ] },
+    { name: 'Oracle', image: 'oracle_sb.png', sounds: [  ] },
+    { name: 'Outworld Devourer', image: 'outworld_devourer_sb.png', sounds: [  ] },
+
+    { name: 'Phantom Assassin', image: 'phantom_assassin_sb.png', sounds: [  ] },
+    { name: 'Phantom Lancer', image: 'phantom_lancer_sb.png', sounds: [  ] },
+    { name: 'Phoenix', image: 'phoenix_sb.png', sounds: [  ] },
+    { name: 'Puck', image: 'puck_sb.png', sounds: [  ] },
+    { name: 'Pudge', image: 'pudge_sb.png', sounds: [  ] },
+    { name: 'Pugna', image: 'pugna_sb.png', sounds: [  ] },
+
+    { name: 'Queen of Pain', image: 'queen_of_pain_sb.png', sounds: [  ] },
+
+    { name: 'Razor', image: 'razor_sb.png', sounds: [  ] },
+    { name: 'Riki', image: 'riki_sb.png', sounds: [  ] },
+    { name: 'Rubick', image: 'rubick_sb.png', sounds: [  ] },
+
+    { name: 'Sand King', image: 'sand_king_sb.png', sounds: [  ] },
+    { name: 'Shadow Demon', image: 'shadow_demon_sb.png', sounds: [  ] },
+    { name: 'Shadow Fiend', image: 'shadow_fiend_sb.png', sounds: [  ] },
+    { name: 'Shadow Shaman', image: 'shadow_shaman_sb.png', sounds: [  ] },
+    { name: 'Silencer', image: 'silencer_sb.png', sounds: [  ] },
+    { name: 'Skywrath Mage', image: 'skywrath_mage_sb.png', sounds: [  ] },
+    { name: 'Slardar', image: 'slardar_sb.png', sounds: [  ] },
+    { name: 'Slark', image: 'slark_sb.png', sounds: [  ] },
+    { name: 'Sniper', image: 'sniper_sb.png', sounds: [  ] },
+    { name: 'Spectre', image: 'spectre_sb.png', sounds: [  ] },
+    { name: 'Spirit Breaker', image: 'spirit_breaker_sb.png', sounds: [  ] },
+    { name: 'Storm Spirit', image: 'storm_spirit_sb.png', sounds: [  ] },
+    { name: 'Sven', image: 'sven_sb.png', sounds: [  ] },
+
+    { name: 'Techies', image: 'techies_sb.png', sounds: [  ] },
+    { name: 'Templar Assassin', image: 'templar_assassin_sb.png', sounds: [  ] },
+    { name: 'Terrorblade', image: 'terrorblade_sb.png', sounds: [  ] },
+    { name: 'Tidehunter', image: 'tidehunter_sb.png', sounds: [  ] },
+    { name: 'Timbersaw', image: 'timbersaw_sb.png', sounds: [  ] },
+    { name: 'Tinker', image: 'tinker_sb.png', sounds: [  ] },
+    { name: 'Tiny', image: 'tiny_sb.png', sounds: [  ] },
+    { name: 'Treant Protector', image: 'treant_protector_sb.png', sounds: [  ] },
+    { name: 'Troll Warlord', image: 'troll_warlord_sb.png', sounds: [  ] },
+    { name: 'Tusk', image: 'tusk_sb.png', sounds: [  ] },
+
+    { name: 'Undying', image: 'undying_sb.png', sounds: [  ] },
+    { name: 'Ursa', image: 'ursa_sb.png', sounds: [  ] },
+
+    { name: 'Vengeful Spirit', image: 'vengeful_spirit_sb.png', sounds: [  ] },
+    { name: 'Venomancer', image: 'venomancer_sb.png', sounds: [  ] },
+    { name: 'Viper', image: 'viper_sb.png', sounds: [  ] },
+    { name: 'Visage', image: 'visage_sb.png', sounds: [  ] },
+
+    { name: 'Warlock', image: 'warlock_sb.png', sounds: [  ] },
+    { name: 'Weaver', image: 'weaver_sb.png', sounds: [  ] },
+    { name: 'Windranger', image: 'windranger_sb.png', sounds: [  ] },
+    { name: 'Winter Wyvern', image: 'winter_wyvern_sb.png', sounds: [  ] },
+    { name: 'Witch Doctor', image: 'witch_doctor_sb.png', sounds: [  ] },
+    { name: 'Wraith King', image: 'wraith_king_sb.png', sounds: [  ] },
+
+    { name: 'Zeus', image: 'zeus_sb.png', sounds: [  ] }*/
 ];
