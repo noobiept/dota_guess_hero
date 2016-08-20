@@ -19,9 +19,9 @@ export function init()
     }
 
 
-export function open( message: string, onclose: () => any )
+export function open( message: string, onClose: () => any )
     {
-    ON_CLOSE = onclose;
+    ON_CLOSE = onClose;
     MESSAGE.innerHTML = message;
 
     CONTAINER.classList.remove( 'hidden' );

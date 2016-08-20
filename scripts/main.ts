@@ -9,16 +9,16 @@ Main.init();
 
 module Main
 {
-var HERO_LIST: HTMLElement;
-var AUDIO: HTMLAudioElement;
-var INPUT: HTMLInputElement;
-var CORRECT_SOUND: HTMLAudioElement;
-var INCORRECT_ELEMENT: HTMLElement;
+var HERO_LIST: HTMLElement;             // container of all the hero entries (what its used to guess the current hero)
+var AUDIO: HTMLAudioElement;            // plays the hero phrases
+var INPUT: HTMLInputElement;            // search input element (to limit the hero list)
+var CORRECT_SOUND: HTMLAudioElement;    // plays a sound whenever a correct guess is made
+var INCORRECT_ELEMENT: HTMLElement;     // shows the current number of incorrect guesses so far
 
-var HEROES_LEFT: Hero[];
-var CURRENT_HERO: Hero;
+var HEROES_LEFT: Hero[];                // has all the heroes that haven't been played yet
+var CURRENT_HERO: Hero;                 // current hero that we're trying to guess
 
-var INCORRECT_GUESSES = 0;
+var INCORRECT_GUESSES = 0;              // number of incorrect guesses so far
 
 
 export function init()
@@ -46,6 +46,9 @@ export function init()
     }
 
 
+/**
+ * Add a new hero to the list.
+ */
 function addListItem( hero: Hero )
     {
     var figure = document.createElement( 'figure' );
@@ -69,6 +72,9 @@ function addListItem( hero: Hero )
     }
 
 
+/**
+ * Updates the list with the heroes that match the search text.
+ */
 function search( event: KeyboardEvent )
     {
     var key = event.keyCode;
@@ -107,6 +113,9 @@ function search( event: KeyboardEvent )
     }
 
 
+/**
+ * Start a new game.
+ */
 function start()
     {
     INCORRECT_GUESSES = 0;
@@ -129,6 +138,9 @@ function start()
     }
 
 
+/**
+ * Get a new random hero to guess (one that hasn't been picked yet).
+ */
 function getNextHero()
     {
     if ( HEROES_LEFT.length === 0 )
@@ -147,7 +159,7 @@ function getNextHero()
         {
         soundPosition++;
 
-            // play the sounds continously
+            // play the sounds continuously
         if ( soundPosition >= CURRENT_HERO.sounds.length )
             {
             soundPosition = 0;
@@ -164,6 +176,9 @@ function getNextHero()
     }
 
 
+/**
+ * Try to guess the current hero. If its correct we move on to the next one.
+ */
 function guess( element: HTMLElement )
     {
     var heroName = element.getAttribute( 'data-name' );
@@ -196,6 +211,9 @@ function guess( element: HTMLElement )
     }
 
 
+/**
+ * Reset the list search (show all the possible heroes).
+ */
 function resetList()
     {
     INPUT.value = '';
@@ -221,12 +239,18 @@ function resetList()
     }
 
 
+/**
+ * Update the number of incorrect guesses so far.
+ */
 function updateGuessCount()
     {
     INCORRECT_ELEMENT.innerHTML = INCORRECT_GUESSES.toString();
     }
 
 
+/**
+ * Get the message to be shown at the end of the game.
+ */
 function endGameMessage()
     {
     var message = "Game Over!<br />";
