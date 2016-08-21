@@ -4,14 +4,14 @@ window.onload = function () {
 };
 var Main;
 (function (Main) {
-    var HERO_LIST;
-    var AUDIO;
-    var INPUT;
-    var CORRECT_SOUND;
-    var INCORRECT_ELEMENT;
-    var HEROES_LEFT;
-    var CURRENT_HERO;
-    var INCORRECT_GUESSES = 0;
+    var HERO_LIST; // container of all the hero entries (what its used to guess the current hero)
+    var AUDIO; // plays the hero phrases
+    var INPUT; // search input element (to limit the hero list)
+    var CORRECT_SOUND; // plays a sound whenever a correct guess is made
+    var INCORRECT_ELEMENT; // shows the current number of incorrect guesses so far
+    var HEROES_LEFT; // has all the heroes that haven't been played yet
+    var CURRENT_HERO; // current hero that we're trying to guess
+    var INCORRECT_GUESSES = 0; // number of incorrect guesses so far
     function init() {
         HERO_LIST = document.getElementById('HeroList');
         AUDIO = document.getElementById('Audio');
@@ -24,12 +24,17 @@ var Main;
             HERO_LIST.appendChild(addListItem(HEROES[a]));
         }
         AUDIO.volume = 0.5;
-        INPUT.onkeyup = search;
+        INPUT.onkeyup = inputKeyUp;
+        var help = document.getElementById('Help');
+        help.onclick = helpPlayer;
         Dialog.init();
         Message.init();
         start();
     }
     Main.init = init;
+    /**
+     * Add a new hero to the list.
+     */
     function addListItem(hero) {
         var figure = document.createElement('figure');
         figure.className = 'Hero';
@@ -45,7 +50,10 @@ var Main;
         figure.appendChild(img);
         return figure;
     }
-    function search(event) {
+    /**
+     * Called when a key is pressed on the search input element. Checks if its the `enter` key and if so then it tries to guess the first hero on the list. Otherwise just limit the list based on the search text.
+     */
+    function inputKeyUp(event) {
         var key = event.keyCode;
         var value = event.target.value;
         // try to guess the first hero
@@ -56,6 +64,12 @@ var Main;
             }
             return;
         }
+        search(value);
+    }
+    /**
+     * Updates the list with the heroes that match the search text.
+     */
+    function search(value) {
         var re = new RegExp(value, 'i');
         var listElements = HERO_LIST.children;
         for (var a = 0; a < listElements.length; a++) {
@@ -69,6 +83,9 @@ var Main;
             }
         }
     }
+    /**
+     * Start a new game.
+     */
     function start() {
         INCORRECT_GUESSES = 0;
         updateGuessCount();
@@ -82,6 +99,9 @@ var Main;
         }
         resetList();
     }
+    /**
+     * Get a new random hero to guess (one that hasn't been picked yet).
+     */
     function getNextHero() {
         if (HEROES_LEFT.length === 0) {
             return false;
@@ -93,7 +113,7 @@ var Main;
         AUDIO.src = CURRENT_HERO.sounds[soundPosition];
         AUDIO.onended = function () {
             soundPosition++;
-            // play the sounds continously
+            // play the sounds continuously
             if (soundPosition >= CURRENT_HERO.sounds.length) {
                 soundPosition = 0;
             }
@@ -104,6 +124,9 @@ var Main;
         };
         return true;
     }
+    /**
+     * Try to guess the current hero. If its correct we move on to the next one.
+     */
     function guess(element) {
         var heroName = element.getAttribute('data-name');
         if (heroName === CURRENT_HERO.name) {
@@ -125,6 +148,9 @@ var Main;
             Message.show('Incorrect :(');
         }
     }
+    /**
+     * Reset the list search (show all the possible heroes).
+     */
     function resetList() {
         INPUT.value = '';
         INPUT.focus();
@@ -140,9 +166,15 @@ var Main;
             }
         }
     }
+    /**
+     * Update the number of incorrect guesses so far.
+     */
     function updateGuessCount() {
         INCORRECT_ELEMENT.innerHTML = INCORRECT_GUESSES.toString();
     }
+    /**
+     * Get the message to be shown at the end of the game.
+     */
     function endGameMessage() {
         var message = "Game Over!<br />";
         if (INCORRECT_GUESSES === 0) {
@@ -152,5 +184,14 @@ var Main;
             message += "You've guessed incorrectly " + INCORRECT_GUESSES + " times.";
         }
         return message;
+    }
+    /**
+     * Help the player guess the hero, by searching for the initial letters of the hero (thus limiting the hero possibilities).
+     */
+    function helpPlayer() {
+        var firstLetters = CURRENT_HERO.name.slice(0, 2);
+        INPUT.value = firstLetters;
+        INPUT.focus();
+        search(firstLetters);
     }
 })(Main || (Main = {}));

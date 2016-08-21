@@ -38,7 +38,10 @@ export function init()
         }
 
     AUDIO.volume = 0.5;
-    INPUT.onkeyup = search;
+    INPUT.onkeyup = inputKeyUp;
+
+    var help = document.getElementById( 'Help' );
+    help.onclick = helpPlayer;
 
     Dialog.init();
     Message.init();
@@ -73,9 +76,9 @@ function addListItem( hero: Hero )
 
 
 /**
- * Updates the list with the heroes that match the search text.
+ * Called when a key is pressed on the search input element. Checks if its the `enter` key and if so then it tries to guess the first hero on the list. Otherwise just limit the list based on the search text.
  */
-function search( event: KeyboardEvent )
+function inputKeyUp( event: KeyboardEvent )
     {
     var key = event.keyCode;
     var value = (<HTMLInputElement> event.target).value;
@@ -92,6 +95,15 @@ function search( event: KeyboardEvent )
         return;
         }
 
+    search( value );
+    }
+
+
+/**
+ * Updates the list with the heroes that match the search text.
+ */
+function search( value: string )
+    {
     var re = new RegExp( value, 'i' );
     var listElements = HERO_LIST.children;
 
@@ -266,5 +278,19 @@ function endGameMessage()
         }
 
     return message;
+    }
+
+
+/**
+ * Help the player guess the hero, by searching for the initial letters of the hero (thus limiting the hero possibilities).
+ */
+function helpPlayer()
+    {
+    var firstLetters = CURRENT_HERO.name.slice( 0, 2 );
+
+    INPUT.value = firstLetters;
+    INPUT.focus();
+
+    search( firstLetters );
     }
 }

@@ -13,8 +13,8 @@ var Dialog;
         ok.onclick = close;
     }
     Dialog.init = init;
-    function open(message, onclose) {
-        ON_CLOSE = onclose;
+    function open(message, onClose) {
+        ON_CLOSE = onClose;
         MESSAGE.innerHTML = message;
         CONTAINER.classList.remove('hidden');
         OVERLAY.classList.remove('hidden');
