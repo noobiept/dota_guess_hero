@@ -8,15 +8,12 @@ var Main;
     var AUDIO; // plays the hero phrases
     var INPUT; // search input element (to limit the hero list)
     var CORRECT_SOUND; // plays a sound whenever a correct guess is made
-    var INCORRECT_ELEMENT; // shows the current number of incorrect guesses so far
     var HEROES_LEFT; // has all the heroes that haven't been played yet
     var CURRENT_HERO; // current hero that we're trying to guess
-    var INCORRECT_GUESSES = 0; // number of incorrect guesses so far
     function init() {
         HERO_LIST = document.getElementById('HeroList');
         AUDIO = document.getElementById('Audio');
         INPUT = document.getElementById('Search');
-        INCORRECT_ELEMENT = document.getElementById('Incorrect');
         CORRECT_SOUND = new Audio('sounds/coins.mp3');
         CORRECT_SOUND.volume = 0.5;
         // build the hero list
@@ -29,6 +26,7 @@ var Main;
         help.onclick = helpPlayer;
         Dialog.init();
         Message.init();
+        Score.init();
         start();
     }
     Main.init = init;
@@ -87,8 +85,6 @@ var Main;
      * Start a new game.
      */
     function start() {
-        INCORRECT_GUESSES = 0;
-        updateGuessCount();
         HEROES_LEFT = HEROES.concat();
         getNextHero();
         INPUT.focus();
@@ -98,6 +94,7 @@ var Main;
             listElements[a].removeAttribute('data-already-selected');
         }
         resetList();
+        Score.reset();
     }
     /**
      * Get a new random hero to guess (one that hasn't been picked yet).
@@ -130,6 +127,7 @@ var Main;
     function guess(element) {
         var heroName = element.getAttribute('data-name');
         if (heroName === CURRENT_HERO.name) {
+            Score.correctGuess();
             // mark this element has already selected, so it doesn't show on the list anymore
             element.setAttribute('data-already-selected', '');
             CORRECT_SOUND.currentTime = 0;
@@ -143,8 +141,7 @@ var Main;
             }
         }
         else {
-            INCORRECT_GUESSES++;
-            updateGuessCount();
+            Score.incorrectGuess();
             Message.show('Incorrect :(');
         }
     }
@@ -167,22 +164,21 @@ var Main;
         }
     }
     /**
-     * Update the number of incorrect guesses so far.
-     */
-    function updateGuessCount() {
-        INCORRECT_ELEMENT.innerHTML = INCORRECT_GUESSES.toString();
-    }
-    /**
      * Get the message to be shown at the end of the game.
      */
     function endGameMessage() {
-        var message = "Game Over!<br />";
-        if (INCORRECT_GUESSES === 0) {
-            message += 'Perfect!';
+        var message = "Game Over!";
+        var score = Score.getCurrentScore();
+        if (score.incorrect !== 0) {
+            message += "<br />You've guessed incorrectly " + score.incorrect + " times.";
         }
-        else {
-            message += "You've guessed incorrectly " + INCORRECT_GUESSES + " times.";
+        if (score.help !== 0) {
+            message += "<br />You've used the help " + score.help + " times.";
         }
+        if (score.incorrect === 0 && score.help === 0) {
+            message += '<br />Perfect!';
+        }
+        message += "<br />Final score: " + score.score;
         return message;
     }
     /**
@@ -193,5 +189,6 @@ var Main;
         INPUT.value = firstLetters;
         INPUT.focus();
         search(firstLetters);
+        Score.helpUsed();
     }
 })(Main || (Main = {}));
