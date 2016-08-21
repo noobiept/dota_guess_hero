@@ -1,4 +1,4 @@
-/// <reference path="../libraries/utilities.1.8.0.d.ts" />
+/// <reference path="../libraries/utilities.1.9.0.d.ts" />
 window.onload = function () {
     Main.init();
 };
@@ -137,6 +137,7 @@ var Main;
             if (!getNextHero()) {
                 AUDIO.pause();
                 INPUT.blur();
+                Score.stopScoring();
                 Dialog.open(endGameMessage(), start);
             }
         }

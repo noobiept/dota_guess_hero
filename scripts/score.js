@@ -1,6 +1,7 @@
 var Score;
 (function (Score) {
     var SCORE_ELEMENT; // UI element that shows the current score
+    var TIMER; // as time passes, the score is decreased
     var SCORE = 0; // current score
     var INCORRECT_GUESSES = 0; // number of incorrect guesses so far
     var HELP_USED = 0; // number of times the help was used
@@ -8,8 +9,10 @@ var Score;
     var CORRECT_SCORE = 100;
     var INCORRECT_PENALTY = 100;
     var HELP_PENALTY = 100;
+    var TIME_PENALTY = 1;
     function init() {
         SCORE_ELEMENT = document.getElementById('Score');
+        TIMER = new Utilities.Timer();
     }
     Score.init = init;
     /**
@@ -25,9 +28,22 @@ var Score;
         SCORE = INITIAL_SCORE;
         INCORRECT_GUESSES = 0;
         HELP_USED = 0;
+        TIMER.start({
+            tickCallback: function () {
+                timePasses();
+            }
+        });
         updateScore();
     }
     Score.reset = reset;
+    function timePasses() {
+        SCORE -= TIME_PENALTY;
+        updateScore();
+    }
+    function stopScoring() {
+        TIMER.stop();
+    }
+    Score.stopScoring = stopScoring;
     function correctGuess() {
         SCORE += CORRECT_SCORE;
         updateScore();

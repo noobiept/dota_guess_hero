@@ -1,6 +1,7 @@
 module Score
 {
 var SCORE_ELEMENT: HTMLElement;         // UI element that shows the current score
+var TIMER: Utilities.Timer;             // as time passes, the score is decreased
 
 var SCORE = 0;                          // current score
 var INCORRECT_GUESSES = 0;              // number of incorrect guesses so far
@@ -10,11 +11,13 @@ var INITIAL_SCORE = 1000;
 var CORRECT_SCORE = 100;
 var INCORRECT_PENALTY = 100;
 var HELP_PENALTY = 100;
+var TIME_PENALTY = 1;
 
 
 export function init()
     {
     SCORE_ELEMENT = document.getElementById( 'Score' );
+    TIMER = new Utilities.Timer();
     }
 
 
@@ -36,7 +39,27 @@ export function reset()
     INCORRECT_GUESSES = 0;
     HELP_USED = 0;
 
+    TIMER.start({
+        tickCallback: function()
+            {
+            timePasses();
+            }
+    });
+
     updateScore();
+    }
+
+
+function timePasses()
+    {
+    SCORE -= TIME_PENALTY;
+    updateScore();
+    }
+
+
+export function stopScoring()
+    {
+    TIMER.stop();
     }
 
 
