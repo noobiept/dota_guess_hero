@@ -4,5 +4,9 @@
         "noImplicitReturns": true,
         "target": "es5"
     },
-    "compileOnSave": true
+    "compileOnSave": true,
+    "exclude": [
+        "release",
+        "libraries"
+    ]
 }

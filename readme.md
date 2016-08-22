@@ -9,6 +9,7 @@ Click on the hero to make a guess. You can also search for its name on the searc
 
 - `tsc --watch` -- Compiles on file changes.
 - `python -m http.server` -- Run local server (open `localhost:8000` on a browser to run the game).
+- Can also just open the `index.html` in a browser.
 
 
 # Dependencies #

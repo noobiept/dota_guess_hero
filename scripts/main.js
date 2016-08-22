@@ -14,7 +14,7 @@ var Main;
         HERO_LIST = document.getElementById('HeroList');
         AUDIO = document.getElementById('Audio');
         INPUT = document.getElementById('Search');
-        CORRECT_SOUND = new Audio('sounds/coins.mp3');
+        CORRECT_SOUND = new Audio('./sounds/coins.mp3');
         CORRECT_SOUND.volume = 0.3;
         CORRECT_SOUND.load();
         // build the hero list

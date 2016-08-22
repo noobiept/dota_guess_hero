@@ -25,7 +25,7 @@ export function init()
     AUDIO = <HTMLAudioElement> document.getElementById( 'Audio' );
     INPUT = <HTMLInputElement> document.getElementById( 'Search' );
 
-    CORRECT_SOUND = new Audio( 'sounds/coins.mp3' );
+    CORRECT_SOUND = new Audio( './sounds/coins.mp3' );
     CORRECT_SOUND.volume = 0.3;
     CORRECT_SOUND.load();
 
