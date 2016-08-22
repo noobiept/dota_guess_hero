@@ -27,6 +27,7 @@ export function init()
 
     CORRECT_SOUND = new Audio( 'sounds/coins.mp3' );
     CORRECT_SOUND.volume = 0.3;
+    CORRECT_SOUND.load();
 
         // build the hero list
     for (var a = 0 ; a < HEROES.length ; a++)
@@ -200,7 +201,7 @@ function guess( element: HTMLElement )
 
         CORRECT_SOUND.currentTime = 0;
         CORRECT_SOUND.play();
-        Message.show( 'Correct!' );
+        Message.correct();
         resetList();
 
         if ( !getNextHero() )
@@ -216,7 +217,7 @@ function guess( element: HTMLElement )
     else
         {
         Score.incorrectGuess();
-        Message.show( 'Incorrect :(' );
+        Message.incorrect();
         }
     }
 

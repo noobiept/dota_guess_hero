@@ -1,3 +1,6 @@
+Try to guess the dota hero, based on the sounds being played.
+
+
 # Usage #
 
 - `tsc --watch` -- Compiles on file changes.

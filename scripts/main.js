@@ -16,6 +16,7 @@ var Main;
         INPUT = document.getElementById('Search');
         CORRECT_SOUND = new Audio('sounds/coins.mp3');
         CORRECT_SOUND.volume = 0.3;
+        CORRECT_SOUND.load();
         // build the hero list
         for (var a = 0; a < HEROES.length; a++) {
             HERO_LIST.appendChild(addListItem(HEROES[a]));
@@ -132,7 +133,7 @@ var Main;
             element.setAttribute('data-already-selected', '');
             CORRECT_SOUND.currentTime = 0;
             CORRECT_SOUND.play();
-            Message.show('Correct!');
+            Message.correct();
             resetList();
             if (!getNextHero()) {
                 AUDIO.pause();
@@ -143,7 +144,7 @@ var Main;
         }
         else {
             Score.incorrectGuess();
-            Message.show('Incorrect :(');
+            Message.incorrect();
         }
     }
     /**

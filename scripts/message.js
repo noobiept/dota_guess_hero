@@ -18,4 +18,16 @@ var Message;
         }, 1000);
     }
     Message.show = show;
+    function correct() {
+        MESSAGE.classList.remove('incorrect');
+        MESSAGE.classList.add('correct');
+        return show('Correct!');
+    }
+    Message.correct = correct;
+    function incorrect() {
+        MESSAGE.classList.remove('correct');
+        MESSAGE.classList.add('incorrect');
+        return show('Incorrect :(');
+    }
+    Message.incorrect = incorrect;
 })(Message || (Message = {}));

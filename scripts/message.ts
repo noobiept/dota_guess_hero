@@ -26,4 +26,22 @@ export function show( message: string )
         TIMEOUT_ID = null;
         }, 1000 );
     }
+
+
+export function correct()
+    {
+    MESSAGE.classList.remove( 'incorrect' );
+    MESSAGE.classList.add( 'correct' );
+
+    return show( 'Correct!' );
+    }
+
+
+export function incorrect()
+    {
+    MESSAGE.classList.remove( 'correct' );
+    MESSAGE.classList.add( 'incorrect' );
+
+    return show( 'Incorrect :(' );
+    }
 }
