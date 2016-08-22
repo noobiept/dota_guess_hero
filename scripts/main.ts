@@ -37,6 +37,7 @@ export function init()
 
     AUDIO.volume = 0.3;
     INPUT.onkeyup = inputKeyUp;
+    INPUT.oninput = inputListener;
 
     var help = document.getElementById( 'Help' );
     help.onclick = helpPlayer;
@@ -75,12 +76,11 @@ function addListItem( hero: Hero )
 
 
 /**
- * Called when a key is pressed on the search input element. Checks if its the `enter` key and if so then it tries to guess the first hero on the list. Otherwise just limit the list based on the search text.
+ * Checks if the `enter` key is pressed if so then it tries to guess the first hero on the list.
  */
 function inputKeyUp( event: KeyboardEvent )
     {
     var key = event.keyCode;
-    var value = (<HTMLInputElement> event.target).value;
 
         // try to guess the first hero
     if ( key === Utilities.KEY_CODE.enter )
@@ -90,10 +90,16 @@ function inputKeyUp( event: KeyboardEvent )
             {
             guess( first );
             }
-
-        return;
         }
+    }
 
+
+/**
+ * Filter the list based on the search text.
+ */
+function inputListener( event: KeyboardEvent )
+    {
+    var value = (<HTMLInputElement> event.target).value;
     search( value );
     }
 

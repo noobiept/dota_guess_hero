@@ -23,6 +23,7 @@ var Main;
         }
         AUDIO.volume = 0.3;
         INPUT.onkeyup = inputKeyUp;
+        INPUT.oninput = inputListener;
         var help = document.getElementById('Help');
         help.onclick = helpPlayer;
         Dialog.init();
@@ -50,19 +51,23 @@ var Main;
         return figure;
     }
     /**
-     * Called when a key is pressed on the search input element. Checks if its the `enter` key and if so then it tries to guess the first hero on the list. Otherwise just limit the list based on the search text.
+     * Checks if the `enter` key is pressed if so then it tries to guess the first hero on the list.
      */
     function inputKeyUp(event) {
         var key = event.keyCode;
-        var value = event.target.value;
         // try to guess the first hero
         if (key === Utilities.KEY_CODE.enter) {
             var first = HERO_LIST.querySelector('.Hero:not(.hidden)');
             if (first) {
                 guess(first);
             }
-            return;
         }
+    }
+    /**
+     * Filter the list based on the search text.
+     */
+    function inputListener(event) {
+        var value = event.target.value;
         search(value);
     }
     /**
