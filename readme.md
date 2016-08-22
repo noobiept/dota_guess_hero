@@ -1,5 +1,9 @@
 Try to guess the dota hero, based on the sounds being played.
 
+![Screenshot](images/screenshot.png "Screenshot")
+
+Click on the hero to make a guess. You can also search for its name on the search entry, to filter the hero list. Press the `enter` key to guess the first element currently on the list.
+
 
 # Usage #
 
