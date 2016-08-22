@@ -26,7 +26,7 @@ export function init()
     INPUT = <HTMLInputElement> document.getElementById( 'Search' );
 
     CORRECT_SOUND = new Audio( 'sounds/coins.mp3' );
-    CORRECT_SOUND.volume = 0.5;
+    CORRECT_SOUND.volume = 0.3;
 
         // build the hero list
     for (var a = 0 ; a < HEROES.length ; a++)
@@ -34,7 +34,7 @@ export function init()
         HERO_LIST.appendChild( addListItem( HEROES[ a ] ) );
         }
 
-    AUDIO.volume = 0.5;
+    AUDIO.volume = 0.3;
     INPUT.onkeyup = inputKeyUp;
 
     var help = document.getElementById( 'Help' );

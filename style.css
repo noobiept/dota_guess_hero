@@ -4,6 +4,28 @@ body {
     background-color: #232425;
 }
 
+.hidden {
+    display: none;
+}
+
+.noOpacity {
+    opacity: 0;
+}
+
+#Message {
+    transition: opacity 0.3s;
+    font-size: 150%;
+}
+
+    /* ---- Hero List ---- */
+
+#HeroList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .Hero {
     text-align: center;
     margin: 10px;
@@ -19,41 +41,44 @@ body {
     border-color: white;
 }
 
-.hidden {
-    display: none;
+.Hero img {
+    width: 59px;
+    height: 33px;
 }
 
-.noOpacity {
-    opacity: 0;
-}
-
-#HeroList {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+    /* ---- Dialog ---- */
 
 #Dialog {
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    background-color: white;
     padding: 10px;
-    border-radius: 5px;
+    background-color: #2a2d30;
+    border: 8px solid;
+    border-image: url('../images/border.png') 15 15 round;
+    min-width: 200px;
+    color: #bcbcbc;
+}
+
+#DialogOk {
+    background-color: #444;
+    border: 1px solid #555;
+    color: #bcbcbc;
+    padding: 5px 20px;
+    margin-top: 10px;
+}
+
+#DialogOk:hover {
+    background-color: #555;
+    text-decoration: none;
 }
 
 #DialogOverlay {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba( 0, 0, 0, 0.5 );
+    background-color: rgba( 0, 0, 0, 0.2 );
     width: 100%;
     height: 100%;
-}
-
-#Message {
-    transition: opacity 0.3s;
-    font-size: 150%;
 }
