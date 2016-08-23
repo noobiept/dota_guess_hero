@@ -44,6 +44,7 @@ body {
     border-color: transparent;
     cursor: pointer;
     transition: border 0.3s;
+    overflow: hidden;
 }
 
 .Hero:hover {
@@ -53,6 +54,10 @@ body {
 .Hero img {
     width: 59px;
     height: 33px;
+}
+
+.Hero figcaption {
+    white-space: nowrap;
 }
 
     /* ---- Dialog ---- */

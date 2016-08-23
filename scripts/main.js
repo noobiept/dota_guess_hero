@@ -74,7 +74,7 @@ var Main;
      * Updates the list with the heroes that match the search text.
      */
     function search(value) {
-        var re = new RegExp(value, 'i');
+        var re = new RegExp('^' + value, 'i');
         var listElements = HERO_LIST.children;
         for (var a = 0; a < listElements.length; a++) {
             var element = listElements[a];

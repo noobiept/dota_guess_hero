@@ -109,7 +109,7 @@ function inputListener( event: KeyboardEvent )
  */
 function search( value: string )
     {
-    var re = new RegExp( value, 'i' );
+    var re = new RegExp( '^' + value, 'i' );
     var listElements = HERO_LIST.children;
 
     for (var a = 0 ; a < listElements.length ; a++)

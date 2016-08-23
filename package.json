@@ -1,6 +1,6 @@
 {
     "name": "dota_guess_hero",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "devDependencies": {
         "grunt": "~1.0.1",
         "grunt-contrib-copy": "~1.0.0",
