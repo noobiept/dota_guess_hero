@@ -22,3 +22,4 @@ Click on the hero to make a guess. You can also search for its name on the searc
 
 - Sounds are linked from [dota2 gamepedia](http://dota2.gamepedia.com/).
 - Sounds/images are part of the game [dota2](http://www.dota2.com/).
+- Icon from [here](https://www.reddit.com/r/DotA2/comments/4oqatp/minimalistic_hero_icons/).
