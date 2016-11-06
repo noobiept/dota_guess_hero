@@ -1,3 +1,5 @@
+# [Try it out here!](http://nbpt.eu/games/dota_guess_hero/) #
+
 Try to guess the dota hero, based on the sounds being played.
 
 ![Screenshot](images/screenshot.png "Screenshot")
