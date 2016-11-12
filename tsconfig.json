@@ -2,11 +2,13 @@
     "compilerOptions": {
         "noImplicitAny": true,
         "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "strictNullChecks": true,
         "target": "es5"
     },
     "compileOnSave": true,
-    "exclude": [
-        "release",
-        "libraries"
+    "include": [
+        "scripts/**/*"
     ]
 }

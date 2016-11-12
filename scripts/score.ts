@@ -16,7 +16,7 @@ var TIME_PENALTY = 1;
 
 export function init()
     {
-    SCORE_ELEMENT = document.getElementById( 'Score' );
+    SCORE_ELEMENT = document.getElementById( 'Score' )!;
     TIMER = new Utilities.Timer();
     }
 

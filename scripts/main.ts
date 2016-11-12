@@ -21,7 +21,7 @@ var CURRENT_HERO: Hero;                 // current hero that we're trying to gue
 
 export function init()
     {
-    HERO_LIST = document.getElementById( 'HeroList' );
+    HERO_LIST = document.getElementById( 'HeroList' )!;
     AUDIO = <HTMLAudioElement> document.getElementById( 'Audio' );
     INPUT = <HTMLInputElement> document.getElementById( 'Search' );
 
@@ -39,7 +39,7 @@ export function init()
     INPUT.onkeyup = inputKeyUp;
     INPUT.oninput = inputListener;
 
-    var help = document.getElementById( 'Help' );
+    var help = document.getElementById( 'Help' )!;
     help.onclick = helpPlayer;
 
     Dialog.init();
@@ -117,7 +117,7 @@ function search( value: string )
         var element = listElements[ a ];
 
         if ( !element.hasAttribute( 'data-already-selected' ) &&
-             re.test( element.getAttribute( 'data-name' ) ) )
+             re.test( element.getAttribute( 'data-name' )! ) )
             {
             element.classList.remove( 'hidden' );
             }

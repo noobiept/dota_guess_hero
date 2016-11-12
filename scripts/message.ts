@@ -1,12 +1,12 @@
 module Message
 {
 var MESSAGE: HTMLElement;
-var TIMEOUT_ID: number = null;
+var TIMEOUT_ID: number | null = null;
 
 
 export function init()
     {
-    MESSAGE = document.getElementById( 'Message' );
+    MESSAGE = document.getElementById( 'Message' )!;
     }
 
 
