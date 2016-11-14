@@ -69,6 +69,25 @@ body {
     cursor: auto;
 }
 
+.hero {
+    position: relative;
+}
+
+.hero img:hover + .tooltip {
+    visibility: visible;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 150px;
+    text-align: center;
+    background-color: black;
+    border-radius: 2px;
+    padding: 5px 0;
+    visibility: hidden;
+}
 
     /* ---- Dialog ---- */
 
