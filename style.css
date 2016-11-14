@@ -60,7 +60,7 @@ body {
     transition: border 0.3s;
 }
 
-.heroGroup img:hover {
+.heroGroup img:hover, img.selected:not(.invalid) {
     border-color: white;
 }
 
@@ -89,6 +89,7 @@ body {
     visibility: hidden;
     z-index: 1;
 }
+
 
     /* ---- Dialog ---- */
 

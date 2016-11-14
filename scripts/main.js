@@ -8,6 +8,7 @@ var Main;
     var AUDIO; // plays the hero phrases
     var INPUT; // search input element (to limit the hero list)
     var CORRECT_SOUND; // plays a sound whenever a correct guess is made
+    var SELECTED; // selected element from the hero search
     var HEROES_LEFT; // has all the heroes that haven't been played yet
     var CURRENT_HERO; // current hero that we're trying to guess
     function init() {
@@ -62,18 +63,27 @@ var Main;
         }
     }
     /**
+     * Returns the first valid hero in the list.
+     */
+    function getFirstHero() {
+        for (var a = 0; a < HERO_LIST.length; a++) {
+            var hero = HERO_LIST[a];
+            if (!hero.classList.contains('invalid')) {
+                return hero;
+            }
+        }
+        return null;
+    }
+    /**
      * Checks if the `enter` key is pressed if so then it tries to guess the first hero on the list.
      */
     function inputKeyUp(event) {
         var key = event.keyCode;
         // try to guess the first hero
         if (key === Utilities.KEY_CODE.enter) {
-            for (var a = 0; a < HERO_LIST.length; a++) {
-                var hero = HERO_LIST[a];
-                if (!hero.classList.contains('invalid')) {
-                    guess(hero);
-                    break;
-                }
+            var first = getFirstHero();
+            if (first) {
+                guess(first);
             }
         }
     }
@@ -99,6 +109,18 @@ var Main;
                 element.classList.add('invalid');
             }
         }
+        // clear the previous selected element
+        if (SELECTED) {
+            SELECTED.classList.remove('selected');
+        }
+        // only select the first element if there's an actual search value
+        if (value !== '') {
+            // add a different styling for the first element (the one that is going to be guessed if 'enter' is pressed)
+            SELECTED = getFirstHero();
+            if (SELECTED) {
+                SELECTED.classList.add('selected');
+            }
+        }
     }
     /**
      * Start a new game.
@@ -109,7 +131,9 @@ var Main;
         INPUT.focus();
         // reset the selected heroes property from all list elements
         for (var a = 0; a < HERO_LIST.length; a++) {
-            HERO_LIST[a].removeAttribute('data-already-selected');
+            var hero = HERO_LIST[a];
+            hero.classList.remove('selected');
+            hero.removeAttribute('data-already-selected');
         }
         resetList();
         Score.reset();
