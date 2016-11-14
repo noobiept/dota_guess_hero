@@ -19,7 +19,6 @@ var Main;
         CORRECT_SOUND.load();
         // build the hero list
         for (var a = 0; a < HEROES.length; a++) {
-            HERO_LIST.appendChild(addListItem(HEROES[a]));
         }
         AUDIO.volume = 0.3;
         INPUT.onkeyup = inputKeyUp;
