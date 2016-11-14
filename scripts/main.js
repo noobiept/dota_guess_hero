@@ -11,7 +11,6 @@ var Main;
     var HEROES_LEFT; // has all the heroes that haven't been played yet
     var CURRENT_HERO; // current hero that we're trying to guess
     function init() {
-        HERO_LIST = document.querySelectorAll('#HeroList img');
         AUDIO = document.getElementById('Audio');
         INPUT = document.getElementById('Search');
         CORRECT_SOUND = new Audio('./sounds/coins.mp3');
@@ -21,6 +20,7 @@ var Main;
         buildHeroList(document.getElementById('StrengthHeroes'), Heroes.Strength);
         buildHeroList(document.getElementById('AgilityHeroes'), Heroes.Agility);
         buildHeroList(document.getElementById('IntelligenceHeroes'), Heroes.Intelligence);
+        HERO_LIST = document.querySelectorAll('#HeroList img');
         AUDIO.volume = 0.3;
         INPUT.onkeyup = inputKeyUp;
         INPUT.oninput = inputListener;
@@ -46,6 +46,7 @@ var Main;
                 var li = document.createElement('li');
                 li.className = 'hero';
                 var img = document.createElement('img');
+                img.setAttribute('data-name', info.name);
                 img.src = 'http://cdn.dota2.com/apps/dota2/images/heroes/' + info.image;
                 img.onclick = function () {
                     guess(this);
@@ -91,7 +92,7 @@ var Main;
         for (var a = 0; a < HERO_LIST.length; a++) {
             var element = HERO_LIST[a];
             if (!element.hasAttribute('data-already-selected') &&
-                re.test(element.parentElement.id)) {
+                re.test(element.getAttribute('data-name'))) {
                 element.classList.remove('invalid');
             }
             else {
@@ -142,7 +143,10 @@ var Main;
      * Try to guess the current hero. If its correct we move on to the next one.
      */
     function guess(element) {
-        var heroName = element.parentElement.id;
+        if (element.hasAttribute('data-already-selected')) {
+            return;
+        }
+        var heroName = element.getAttribute('data-name');
         if (heroName === CURRENT_HERO.name) {
             Score.correctGuess();
             // mark this element has already selected, so it doesn't show on the list anymore

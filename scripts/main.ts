@@ -21,7 +21,6 @@ var CURRENT_HERO: Heroes.Hero;                 // current hero that we're trying
 
 export function init()
     {
-    HERO_LIST = document.querySelectorAll( '#HeroList img' );
     AUDIO = <HTMLAudioElement> document.getElementById( 'Audio' );
     INPUT = <HTMLInputElement> document.getElementById( 'Search' );
 
@@ -34,6 +33,7 @@ export function init()
     buildHeroList( document.getElementById( 'AgilityHeroes' )!, Heroes.Agility );
     buildHeroList( document.getElementById( 'IntelligenceHeroes' )!, Heroes.Intelligence );
 
+    HERO_LIST = document.querySelectorAll( '#HeroList img' );
     AUDIO.volume = 0.3;
     INPUT.onkeyup = inputKeyUp;
     INPUT.oninput = inputListener;
@@ -67,6 +67,7 @@ function buildHeroList( container: HTMLElement, heroData: Heroes.Hero[][] )
             li.className = 'hero';
 
             let img = document.createElement( 'img' );
+            img.setAttribute( 'data-name', info.name );
             img.src = 'http://cdn.dota2.com/apps/dota2/images/heroes/' + info.image;
             img.onclick = function()
                 {
@@ -133,7 +134,7 @@ function search( value: string )
         var element = HERO_LIST[ a ];
 
         if ( !element.hasAttribute( 'data-already-selected' ) &&
-             re.test( element.parentElement.id ) )
+             re.test( element.getAttribute( 'data-name' )! ) )
             {
             element.classList.remove( 'invalid' );
             }
@@ -210,7 +211,12 @@ function getNextHero()
  */
 function guess( element: HTMLElement )
     {
-    var heroName = element.parentElement.id;
+    if ( element.hasAttribute( 'data-already-selected' ) )
+        {
+        return;
+        }
+
+    var heroName = element.getAttribute( 'data-name' );
 
     if ( heroName === CURRENT_HERO.name )
         {
