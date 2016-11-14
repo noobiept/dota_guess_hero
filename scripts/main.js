@@ -17,8 +17,13 @@ var Main;
         CORRECT_SOUND = new Audio('./sounds/coins.mp3');
         CORRECT_SOUND.volume = 0.3;
         CORRECT_SOUND.load();
-        // build the hero list
-        for (var a = 0; a < HEROES.length; a++) {
+        // update the hero list
+        var heroes = document.querySelectorAll('#HeroList img');
+        for (var a = 0; a < heroes.length; a++) {
+            var element = heroes[a];
+            element.onclick = function () {
+                guess(this.parentElement);
+            };
         }
         AUDIO.volume = 0.3;
         INPUT.onkeyup = inputKeyUp;
@@ -31,24 +36,6 @@ var Main;
         start();
     }
     Main.init = init;
-    /**
-     * Add a new hero to the list.
-     */
-    function addListItem(hero) {
-        var figure = document.createElement('figure');
-        figure.className = 'Hero';
-        figure.setAttribute('data-name', hero.name);
-        figure.onclick = function () {
-            guess(figure);
-        };
-        var figcaption = document.createElement('figcaption');
-        figcaption.innerText = hero.name;
-        var img = document.createElement('img');
-        img.src = 'http://cdn.dota2.com/apps/dota2/images/heroes/' + hero.image;
-        figure.appendChild(figcaption);
-        figure.appendChild(img);
-        return figure;
-    }
     /**
      * Checks if the `enter` key is pressed if so then it tries to guess the first hero on the list.
      */
@@ -130,7 +117,7 @@ var Main;
      * Try to guess the current hero. If its correct we move on to the next one.
      */
     function guess(element) {
-        var heroName = element.getAttribute('data-name');
+        var heroName = element.id;
         if (heroName === CURRENT_HERO.name) {
             Score.correctGuess();
             // mark this element has already selected, so it doesn't show on the list anymore

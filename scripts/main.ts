@@ -29,10 +29,17 @@ export function init()
     CORRECT_SOUND.volume = 0.3;
     CORRECT_SOUND.load();
 
-        // build the hero list
-    for (var a = 0 ; a < HEROES.length ; a++)
+        // update the hero list
+    var heroes = document.querySelectorAll( '#HeroList img' );
+
+    for (var a = 0 ; a < heroes.length ; a++)
         {
-        // HERO_LIST.appendChild( addListItem( HEROES[ a ] ) );
+        let element = <HTMLElement> heroes[ a ];
+
+        element.onclick = function()
+            {
+            guess( this.parentElement );
+            }
         }
 
     AUDIO.volume = 0.3;
@@ -46,32 +53,6 @@ export function init()
     Message.init();
     Score.init();
     start();
-    }
-
-
-/**
- * Add a new hero to the list.
- */
-function addListItem( hero: Hero )
-    {
-    var figure = document.createElement( 'figure' );
-    figure.className = 'Hero';
-    figure.setAttribute( 'data-name', hero.name );
-    figure.onclick = function()
-        {
-        guess( figure );
-        };
-
-    var figcaption = document.createElement( 'figcaption' );
-    figcaption.innerText = hero.name;
-
-    var img = document.createElement( 'img' );
-    img.src = 'http://cdn.dota2.com/apps/dota2/images/heroes/' + hero.image;
-
-    figure.appendChild( figcaption );
-    figure.appendChild( img );
-
-    return figure;
     }
 
 
@@ -196,7 +177,7 @@ function getNextHero()
  */
 function guess( element: HTMLElement )
     {
-    var heroName = element.getAttribute( 'data-name' );
+    var heroName = element.id;
 
     if ( heroName === CURRENT_HERO.name )
         {
