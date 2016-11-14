@@ -9,7 +9,7 @@ Main.init();
 
 module Main
 {
-var HERO_LIST: HTMLElement;             // container of all the hero entries (what its used to guess the current hero)
+var HERO_LIST: NodeListOf<Element>;        // list with all the heroes (what its used to guess the current hero)
 var AUDIO: HTMLAudioElement;            // plays the hero phrases
 var INPUT: HTMLInputElement;            // search input element (to limit the hero list)
 var CORRECT_SOUND: HTMLAudioElement;    // plays a sound whenever a correct guess is made
@@ -21,7 +21,7 @@ var CURRENT_HERO: Hero;                 // current hero that we're trying to gue
 
 export function init()
     {
-    HERO_LIST = document.getElementById( 'HeroList' )!;
+    HERO_LIST = document.querySelectorAll( '#HeroList img' );
     AUDIO = <HTMLAudioElement> document.getElementById( 'Audio' );
     INPUT = <HTMLInputElement> document.getElementById( 'Search' );
 
@@ -30,15 +30,14 @@ export function init()
     CORRECT_SOUND.load();
 
         // update the hero list
-    var heroes = document.querySelectorAll( '#HeroList img' );
 
-    for (var a = 0 ; a < heroes.length ; a++)
+
+    for (var a = 0 ; a < HERO_LIST.length ; a++)
         {
-        let element = <HTMLElement> heroes[ a ];
-
+        let element = <HTMLElement> HERO_LIST[ a ];
         element.onclick = function()
             {
-            guess( this.parentElement );
+            guess( this );
             }
         }
 
@@ -66,10 +65,15 @@ function inputKeyUp( event: KeyboardEvent )
         // try to guess the first hero
     if ( key === Utilities.KEY_CODE.enter )
         {
-        var first = <HTMLElement> HERO_LIST.querySelector( '.Hero:not(.hidden)' );
-        if ( first )
+        for (var a = 0 ; a < HERO_LIST.length ; a++)
             {
-            guess( first );
+            var hero = <HTMLElement> HERO_LIST[ a ];
+
+            if ( !hero.classList.contains( 'invalid' ) )
+                {
+                guess( hero );
+                break;
+                }
             }
         }
     }
@@ -91,21 +95,20 @@ function inputListener( event: KeyboardEvent )
 function search( value: string )
     {
     var re = new RegExp( '^' + value, 'i' );
-    var listElements = HERO_LIST.children;
 
-    for (var a = 0 ; a < listElements.length ; a++)
+    for (var a = 0 ; a < HERO_LIST.length ; a++)
         {
-        var element = listElements[ a ];
+        var element = HERO_LIST[ a ];
 
         if ( !element.hasAttribute( 'data-already-selected' ) &&
-             re.test( element.getAttribute( 'data-name' )! ) )
+             re.test( element.parentElement.id ) )
             {
-            element.classList.remove( 'hidden' );
+            element.classList.remove( 'invalid' );
             }
 
         else
             {
-            element.classList.add( 'hidden' );
+            element.classList.add( 'invalid' );
             }
         }
     }
@@ -122,11 +125,9 @@ function start()
     INPUT.focus();
 
         // reset the selected heroes property from all list elements
-    var listElements = HERO_LIST.children;
-
-    for (var a = 0 ; a < listElements.length ; a++)
+    for (var a = 0 ; a < HERO_LIST.length ; a++)
         {
-        listElements[ a ].removeAttribute( 'data-already-selected' );
+        HERO_LIST[ a ].removeAttribute( 'data-already-selected' );
         }
 
     resetList();
@@ -177,7 +178,7 @@ function getNextHero()
  */
 function guess( element: HTMLElement )
     {
-    var heroName = element.id;
+    var heroName = element.parentElement.id;
 
     if ( heroName === CURRENT_HERO.name )
         {
@@ -217,21 +218,19 @@ function resetList()
     INPUT.value = '';
     INPUT.focus();
 
-    var listElements = HERO_LIST.children;
-
-    for (var a = 0 ; a < listElements.length ; a++)
+    for (var a = 0 ; a < HERO_LIST.length ; a++)
         {
-        var element = listElements[ a ];
+        var element = HERO_LIST[ a ];
 
             // don't show the heroes that have already been selected
         if ( element.hasAttribute( 'data-already-selected' ) )
             {
-            element.classList.add( 'hidden' );
+            element.classList.add( 'invalid' );
             }
 
         else
             {
-            element.classList.remove( 'hidden' );
+            element.classList.remove( 'invalid' );
             }
         }
     }

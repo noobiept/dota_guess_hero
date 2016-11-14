@@ -4,25 +4,24 @@ window.onload = function () {
 };
 var Main;
 (function (Main) {
-    var HERO_LIST; // container of all the hero entries (what its used to guess the current hero)
+    var HERO_LIST; // list with all the heroes (what its used to guess the current hero)
     var AUDIO; // plays the hero phrases
     var INPUT; // search input element (to limit the hero list)
     var CORRECT_SOUND; // plays a sound whenever a correct guess is made
     var HEROES_LEFT; // has all the heroes that haven't been played yet
     var CURRENT_HERO; // current hero that we're trying to guess
     function init() {
-        HERO_LIST = document.getElementById('HeroList');
+        HERO_LIST = document.querySelectorAll('#HeroList img');
         AUDIO = document.getElementById('Audio');
         INPUT = document.getElementById('Search');
         CORRECT_SOUND = new Audio('./sounds/coins.mp3');
         CORRECT_SOUND.volume = 0.3;
         CORRECT_SOUND.load();
         // update the hero list
-        var heroes = document.querySelectorAll('#HeroList img');
-        for (var a = 0; a < heroes.length; a++) {
-            var element = heroes[a];
+        for (var a = 0; a < HERO_LIST.length; a++) {
+            var element = HERO_LIST[a];
             element.onclick = function () {
-                guess(this.parentElement);
+                guess(this);
             };
         }
         AUDIO.volume = 0.3;
@@ -43,9 +42,12 @@ var Main;
         var key = event.keyCode;
         // try to guess the first hero
         if (key === Utilities.KEY_CODE.enter) {
-            var first = HERO_LIST.querySelector('.Hero:not(.hidden)');
-            if (first) {
-                guess(first);
+            for (var a = 0; a < HERO_LIST.length; a++) {
+                var hero = HERO_LIST[a];
+                if (!hero.classList.contains('invalid')) {
+                    guess(hero);
+                    break;
+                }
             }
         }
     }
@@ -61,15 +63,14 @@ var Main;
      */
     function search(value) {
         var re = new RegExp('^' + value, 'i');
-        var listElements = HERO_LIST.children;
-        for (var a = 0; a < listElements.length; a++) {
-            var element = listElements[a];
+        for (var a = 0; a < HERO_LIST.length; a++) {
+            var element = HERO_LIST[a];
             if (!element.hasAttribute('data-already-selected') &&
-                re.test(element.getAttribute('data-name'))) {
-                element.classList.remove('hidden');
+                re.test(element.parentElement.id)) {
+                element.classList.remove('invalid');
             }
             else {
-                element.classList.add('hidden');
+                element.classList.add('invalid');
             }
         }
     }
@@ -81,9 +82,8 @@ var Main;
         getNextHero();
         INPUT.focus();
         // reset the selected heroes property from all list elements
-        var listElements = HERO_LIST.children;
-        for (var a = 0; a < listElements.length; a++) {
-            listElements[a].removeAttribute('data-already-selected');
+        for (var a = 0; a < HERO_LIST.length; a++) {
+            HERO_LIST[a].removeAttribute('data-already-selected');
         }
         resetList();
         Score.reset();
@@ -117,7 +117,7 @@ var Main;
      * Try to guess the current hero. If its correct we move on to the next one.
      */
     function guess(element) {
-        var heroName = element.id;
+        var heroName = element.parentElement.id;
         if (heroName === CURRENT_HERO.name) {
             Score.correctGuess();
             // mark this element has already selected, so it doesn't show on the list anymore
@@ -144,15 +144,14 @@ var Main;
     function resetList() {
         INPUT.value = '';
         INPUT.focus();
-        var listElements = HERO_LIST.children;
-        for (var a = 0; a < listElements.length; a++) {
-            var element = listElements[a];
+        for (var a = 0; a < HERO_LIST.length; a++) {
+            var element = HERO_LIST[a];
             // don't show the heroes that have already been selected
             if (element.hasAttribute('data-already-selected')) {
-                element.classList.add('hidden');
+                element.classList.add('invalid');
             }
             else {
-                element.classList.remove('hidden');
+                element.classList.remove('invalid');
             }
         }
     }

@@ -8,6 +8,10 @@ body {
     display: none;
 }
 
+.invalid {
+    opacity: 0.1;
+}
+
 .noOpacity {
     opacity: 0;
 }
@@ -58,6 +62,11 @@ body {
 
 .heroGroup img:hover {
     border-color: white;
+}
+
+.heroGroup img.invalid:hover {
+    border-color: transparent;
+    cursor: auto;
 }
 
 
