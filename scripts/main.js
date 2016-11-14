@@ -17,13 +17,10 @@ var Main;
         CORRECT_SOUND = new Audio('./sounds/coins.mp3');
         CORRECT_SOUND.volume = 0.3;
         CORRECT_SOUND.load();
-        // update the hero list
-        for (var a = 0; a < HERO_LIST.length; a++) {
-            var element = HERO_LIST[a];
-            element.onclick = function () {
-                guess(this);
-            };
-        }
+        // build the hero list
+        buildHeroList(document.getElementById('StrengthHeroes'), Heroes.Strength);
+        buildHeroList(document.getElementById('AgilityHeroes'), Heroes.Agility);
+        buildHeroList(document.getElementById('IntelligenceHeroes'), Heroes.Intelligence);
         AUDIO.volume = 0.3;
         INPUT.onkeyup = inputKeyUp;
         INPUT.oninput = inputListener;
@@ -35,6 +32,34 @@ var Main;
         start();
     }
     Main.init = init;
+    /**
+     * Build the hero list based on the heroes data.
+     */
+    function buildHeroList(container, heroData) {
+        // each array here is a sub-group
+        for (var a = 0; a < heroData.length; a++) {
+            var group = heroData[a];
+            var ul = document.createElement('ul');
+            ul.className = 'heroGroup';
+            for (var b = 0; b < group.length; b++) {
+                var info = group[b];
+                var li = document.createElement('li');
+                li.className = 'hero';
+                var img = document.createElement('img');
+                img.src = 'http://cdn.dota2.com/apps/dota2/images/heroes/' + info.image;
+                img.onclick = function () {
+                    guess(this);
+                };
+                var tooltip = document.createElement('span');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = info.name;
+                li.appendChild(img);
+                li.appendChild(tooltip);
+                ul.appendChild(li);
+            }
+            container.appendChild(ul);
+        }
+    }
     /**
      * Checks if the `enter` key is pressed if so then it tries to guess the first hero on the list.
      */
@@ -78,7 +103,7 @@ var Main;
      * Start a new game.
      */
     function start() {
-        HEROES_LEFT = HEROES.concat();
+        HEROES_LEFT = Heroes.getAll();
         getNextHero();
         INPUT.focus();
         // reset the selected heroes property from all list elements

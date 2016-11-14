@@ -15,8 +15,8 @@ var INPUT: HTMLInputElement;            // search input element (to limit the he
 var CORRECT_SOUND: HTMLAudioElement;    // plays a sound whenever a correct guess is made
 
 
-var HEROES_LEFT: Hero[];                // has all the heroes that haven't been played yet
-var CURRENT_HERO: Hero;                 // current hero that we're trying to guess
+var HEROES_LEFT: Heroes.Hero[];                // has all the heroes that haven't been played yet
+var CURRENT_HERO: Heroes.Hero;                 // current hero that we're trying to guess
 
 
 export function init()
@@ -29,17 +29,10 @@ export function init()
     CORRECT_SOUND.volume = 0.3;
     CORRECT_SOUND.load();
 
-        // update the hero list
-
-
-    for (var a = 0 ; a < HERO_LIST.length ; a++)
-        {
-        let element = <HTMLElement> HERO_LIST[ a ];
-        element.onclick = function()
-            {
-            guess( this );
-            }
-        }
+        // build the hero list
+    buildHeroList( document.getElementById( 'StrengthHeroes' )!, Heroes.Strength );
+    buildHeroList( document.getElementById( 'AgilityHeroes' )!, Heroes.Agility );
+    buildHeroList( document.getElementById( 'IntelligenceHeroes' )!, Heroes.Intelligence );
 
     AUDIO.volume = 0.3;
     INPUT.onkeyup = inputKeyUp;
@@ -52,6 +45,45 @@ export function init()
     Message.init();
     Score.init();
     start();
+    }
+
+
+/**
+ * Build the hero list based on the heroes data.
+ */
+function buildHeroList( container: HTMLElement, heroData: Heroes.Hero[][] )
+    {
+        // each array here is a sub-group
+    for (let a = 0 ; a < heroData.length ; a++)
+        {
+        let group = heroData[ a ];
+        let ul = document.createElement( 'ul' );
+        ul.className = 'heroGroup';
+
+        for (let b = 0 ; b < group.length ; b++)
+            {
+            let info = group[ b ];
+            let li = document.createElement( 'li' );
+            li.className = 'hero';
+
+            let img = document.createElement( 'img' );
+            img.src = 'http://cdn.dota2.com/apps/dota2/images/heroes/' + info.image;
+            img.onclick = function()
+                {
+                guess( this );
+                };
+
+            let tooltip = document.createElement( 'span' );
+            tooltip.className = 'tooltip';
+            tooltip.textContent = info.name;
+
+            li.appendChild( img );
+            li.appendChild( tooltip );
+            ul.appendChild( li );
+            }
+
+        container.appendChild( ul );
+        }
     }
 
 
@@ -119,7 +151,7 @@ function search( value: string )
  */
 function start()
     {
-    HEROES_LEFT = HEROES.concat();
+    HEROES_LEFT = Heroes.getAll();
     getNextHero();
 
     INPUT.focus();
