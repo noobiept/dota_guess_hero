@@ -45,6 +45,10 @@ export function init()
     Message.init();
     Score.init();
     start();
+
+        // show the list after its been loaded
+    var listContainer = document.getElementById( 'HeroList' )!;
+    listContainer.classList.remove( 'hidden' );
     }
 
 
@@ -138,6 +142,20 @@ function inputListener( event: KeyboardEvent )
 
 
 /**
+ * Clear the selected hero.
+ */
+function clearSelected()
+    {
+    if ( SELECTED )
+        {
+        SELECTED.classList.remove( 'selected' );
+        }
+
+    SELECTED = null;
+    }
+
+
+/**
  * Updates the list with the heroes that match the search text.
  */
 function search( value: string )
@@ -161,10 +179,7 @@ function search( value: string )
         }
 
         // clear the previous selected element
-    if ( SELECTED )
-        {
-        SELECTED.classList.remove( 'selected' );
-        }
+    clearSelected();
 
         // only select the first element if there's an actual search value
     if ( value !== '' )
@@ -194,11 +209,10 @@ function start()
     for (var a = 0 ; a < HERO_LIST.length ; a++)
         {
         let hero = HERO_LIST[ a ];
-
-        hero.classList.remove( 'selected' );
         hero.removeAttribute( 'data-already-selected' );
         }
 
+    clearSelected();
     resetList();
     Score.reset();
     }
@@ -291,6 +305,7 @@ function resetList()
     {
     INPUT.value = '';
     INPUT.focus();
+    clearSelected();
 
     for (var a = 0 ; a < HERO_LIST.length ; a++)
         {

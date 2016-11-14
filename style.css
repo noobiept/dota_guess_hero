@@ -4,7 +4,7 @@ body {
     background-color: #232425;
 }
 
-.hidden {
+.hidden, #HeroList.hidden {
     display: none;
 }
 
@@ -39,6 +39,10 @@ body {
     margin-top: 5px;
 }
 
+#HeroList h2 img {
+    vertical-align: bottom;
+}
+
 .heroGroup {
     margin: 10px;
     padding: 0;
@@ -58,6 +62,8 @@ body {
     border-color: transparent;
     cursor: pointer;
     transition: border 0.3s;
+    width: 59px;
+    height: 33px;
 }
 
 .heroGroup img:hover, img.selected:not(.invalid) {
@@ -112,6 +118,7 @@ body {
     color: #bcbcbc;
     padding: 5px 20px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 #DialogOk:hover {
