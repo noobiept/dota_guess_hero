@@ -2,6 +2,7 @@ module.exports = function( grunt )
 {
 var root = './';
 var dest = './release/<%= pkg.name %> <%= pkg.version %>/';
+var temp = './temp/';
 
 
 grunt.initConfig({
@@ -9,12 +10,13 @@ grunt.initConfig({
 
         clean: {
                 // delete the destination folder
-            release: [
+            previousBuild: [
                 dest,
             ],
                 // remove temporary files
-            temp: [
-                    root + 'temp/'
+            afterBuild: [
+                    temp,
+                    '.tscache',
                 ]
         },
 
@@ -22,10 +24,14 @@ grunt.initConfig({
         ts: {
             release: {
                 src: [ root + 'scripts/*.ts' ],
-                dest: 'temp/code.js',
+                dest: temp + 'code.js',
                 options: {
-                    sourceMap: false,
-                    target: 'es5'
+                    "noImplicitAny": true,
+                    "noImplicitReturns": true,
+                    "noImplicitThis": true,
+                    "noUnusedLocals": true,
+                    "strictNullChecks": true,
+                    "target": "es5"
                 }
             }
         },
@@ -39,8 +45,6 @@ grunt.initConfig({
                     'images/**',
                     'libraries/**',
                     'sounds/**',
-                    'index.html',
-                    'style.css'
                 ],
                 dest: dest
             }
@@ -49,7 +53,7 @@ grunt.initConfig({
         uglify: {
             release: {
                 files: [{
-                    src: 'temp/code.js',
+                    src: temp + 'code.js',
                     dest: dest + 'min.js'
                 }]
             }
@@ -90,5 +94,5 @@ grunt.loadNpmTasks( 'grunt-processhtml' );
 grunt.loadNpmTasks( 'grunt-ts' );
 
     // tasks
-grunt.registerTask( 'default', [ 'clean:release', 'ts', 'copy', 'uglify', 'cssmin', 'processhtml', 'clean:temp' ] );
+grunt.registerTask( 'default', [ 'clean:previousBuild', 'ts', 'copy', 'uglify', 'cssmin', 'processhtml', 'clean:afterBuild' ] );
 };
