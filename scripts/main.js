@@ -21,7 +21,7 @@ var Main;
         buildHeroList(document.getElementById('StrengthHeroes'), Heroes.Strength);
         buildHeroList(document.getElementById('AgilityHeroes'), Heroes.Agility);
         buildHeroList(document.getElementById('IntelligenceHeroes'), Heroes.Intelligence);
-        HERO_LIST = document.querySelectorAll('#HeroList img');
+        HERO_LIST = document.querySelectorAll('.hero img');
         AUDIO.volume = 0.3;
         INPUT.onkeyup = inputKeyUp;
         INPUT.oninput = inputListener;
@@ -110,7 +110,12 @@ var Main;
      * Updates the list with the heroes that match the search text.
      */
     function search(value) {
-        var re = new RegExp('^' + value, 'i');
+        try {
+            var re = new RegExp('^' + value, 'i');
+        }
+        catch (error) {
+            return;
+        }
         for (var a = 0; a < HERO_LIST.length; a++) {
             var element = HERO_LIST[a];
             if (!element.hasAttribute('data-already-selected') &&

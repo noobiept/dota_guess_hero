@@ -79,7 +79,7 @@ body {
     position: relative;
 }
 
-.hero img:hover:not([data-already-selected]) + .tooltip {
+.hero img:hover:not(.invalid) + .tooltip {
     visibility: visible;
 }
 

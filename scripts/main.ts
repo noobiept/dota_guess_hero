@@ -33,7 +33,7 @@ export function init()
     buildHeroList( document.getElementById( 'AgilityHeroes' )!, Heroes.Agility );
     buildHeroList( document.getElementById( 'IntelligenceHeroes' )!, Heroes.Intelligence );
 
-    HERO_LIST = document.querySelectorAll( '#HeroList img' );
+    HERO_LIST = document.querySelectorAll( '.hero img' );
     AUDIO.volume = 0.3;
     INPUT.onkeyup = inputKeyUp;
     INPUT.oninput = inputListener;
@@ -160,7 +160,13 @@ function clearSelected()
  */
 function search( value: string )
     {
-    var re = new RegExp( '^' + value, 'i' );
+    try {
+        var re = new RegExp( '^' + value, 'i' );
+    }
+
+    catch( error ) {
+        return;
+    }
 
     for (var a = 0 ; a < HERO_LIST.length ; a++)
         {
