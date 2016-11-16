@@ -55,6 +55,9 @@ var Main;
                 img.onclick = function () {
                     guess(this);
                 };
+                if (info.alternateName) {
+                    img.setAttribute('data-alternate-name', info.alternateName);
+                }
                 var tooltip = document.createElement('span');
                 tooltip.className = 'tooltip';
                 tooltip.textContent = info.name;
@@ -118,12 +121,14 @@ var Main;
         }
         for (var a = 0; a < HERO_LIST.length; a++) {
             var element = HERO_LIST[a];
-            if (!element.hasAttribute('data-already-selected') &&
-                re.test(element.getAttribute('data-name'))) {
-                element.classList.remove('invalid');
-            }
-            else {
-                element.classList.add('invalid');
+            if (!element.hasAttribute('data-already-selected')) {
+                if (re.test(element.getAttribute('data-name')) ||
+                    re.test(element.getAttribute('data-alternate-name'))) {
+                    element.classList.remove('invalid');
+                }
+                else {
+                    element.classList.add('invalid');
+                }
             }
         }
         // clear the previous selected element

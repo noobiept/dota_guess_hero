@@ -78,6 +78,11 @@ function buildHeroList( container: HTMLElement, heroData: Heroes.Hero[][] )
                 guess( this );
                 };
 
+            if ( info.alternateName )
+                {
+                img.setAttribute( 'data-alternate-name', info.alternateName );
+                }
+
             let tooltip = document.createElement( 'span' );
             tooltip.className = 'tooltip';
             tooltip.textContent = info.name;
@@ -172,15 +177,18 @@ function search( value: string )
         {
         var element = HERO_LIST[ a ];
 
-        if ( !element.hasAttribute( 'data-already-selected' ) &&
-             re.test( element.getAttribute( 'data-name' )! ) )
+        if ( !element.hasAttribute( 'data-already-selected' ) )
             {
-            element.classList.remove( 'invalid' );
-            }
+            if ( re.test( element.getAttribute( 'data-name' )! ) ||
+                 re.test( element.getAttribute( 'data-alternate-name' )! ) )
+                {
+                element.classList.remove( 'invalid' );
+                }
 
-        else
-            {
-            element.classList.add( 'invalid' );
+            else
+                {
+                element.classList.add( 'invalid' );
+                }
             }
         }
 
