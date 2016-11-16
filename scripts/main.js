@@ -143,7 +143,7 @@ var Main;
     function start() {
         HEROES_LEFT = Heroes.getAll();
         getNextHero();
-        INPUT.focus();
+        focusInputEntry();
         // reset the selected heroes property from all list elements
         for (var a = 0; a < HERO_LIST.length; a++) {
             var hero = HERO_LIST[a];
@@ -211,7 +211,7 @@ var Main;
      */
     function resetList() {
         INPUT.value = '';
-        INPUT.focus();
+        focusInputEntry();
         clearSelected();
         for (var a = 0; a < HERO_LIST.length; a++) {
             var element = HERO_LIST[a];
@@ -248,8 +248,17 @@ var Main;
     function helpPlayer() {
         var firstLetters = CURRENT_HERO.name.slice(0, 2);
         INPUT.value = firstLetters;
-        INPUT.focus();
+        focusInputEntry();
         search(firstLetters);
         Score.helpUsed();
+    }
+    /**
+     * Put the focus on the input entry.
+     * If the device has a small width (possible a touch mobile device) then we don't focus, so that it doesn't trigger a virtual keyboard to appear.
+     */
+    function focusInputEntry() {
+        if (window.screen.width > 1000) {
+            INPUT.focus();
+        }
     }
 })(Main || (Main = {}));
