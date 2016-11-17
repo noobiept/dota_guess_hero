@@ -24,10 +24,26 @@ body {
     color: red;
 }
 
+
+    /* ---- Menu ---- */
+
 #Message {
     transition: opacity 0.3s;
     font-size: 150%;
 }
+
+#Help {
+    margin-right: 15px;
+}
+
+#Controls {
+    margin: 5px;
+}
+
+#Score {
+    font-weight: bold;
+}
+
 
     /* ---- Hero List ---- */
 

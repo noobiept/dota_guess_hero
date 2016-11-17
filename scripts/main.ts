@@ -24,6 +24,8 @@ var SELECTED: HTMLElement | null;       // selected element from the hero search
 var HEROES_LEFT: Heroes.Hero[];         // has all the heroes that haven't been played yet
 var CURRENT_HERO: Heroes.Hero;          // current hero that we're trying to guess
 
+type Sort = 'ReleaseDate' | 'Alphabetically';
+
 
 export function init()
     {
@@ -35,9 +37,25 @@ export function init()
     CORRECT_SOUND.load();
 
         // build the hero list
-    buildListByReleaseDate();
+    let initSort = <Sort> localStorage.getItem( 'dota_guess_hero_list_sort' );
+
+    if ( !initSort )
+        {
+        initSort = 'ReleaseDate';
+        }
+
+    if ( initSort === 'Alphabetically' )
+        {
+        buildListAlphabetically();
+        }
+
+    else
+        {
+        buildListByReleaseDate();
+        }
 
     var listSort = <HTMLSelectElement> document.getElementById( 'ListSort' );
+    listSort.value = initSort;
     listSort.onchange = function()
         {
         if ( listSort.value === 'ReleaseDate' )
@@ -49,6 +67,9 @@ export function init()
             {
             buildListAlphabetically();
             }
+
+            // save to local storage, so that we can load in the future in the latest sort type
+        localStorage.setItem( 'dota_guess_hero_list_sort', listSort.value );
 
             // restart the game after changing the list
         Message.restart();

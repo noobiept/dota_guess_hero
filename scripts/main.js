@@ -21,8 +21,18 @@ var Main;
         CORRECT_SOUND.volume = 0.3;
         CORRECT_SOUND.load();
         // build the hero list
-        buildListByReleaseDate();
+        var initSort = localStorage.getItem('dota_guess_hero_list_sort');
+        if (!initSort) {
+            initSort = 'ReleaseDate';
+        }
+        if (initSort === 'Alphabetically') {
+            buildListAlphabetically();
+        }
+        else {
+            buildListByReleaseDate();
+        }
         var listSort = document.getElementById('ListSort');
+        listSort.value = initSort;
         listSort.onchange = function () {
             if (listSort.value === 'ReleaseDate') {
                 buildListByReleaseDate();
@@ -30,6 +40,8 @@ var Main;
             else {
                 buildListAlphabetically();
             }
+            // save to local storage, so that we can load in the future in the latest sort type
+            localStorage.setItem('dota_guess_hero_list_sort', listSort.value);
             // restart the game after changing the list
             Message.restart();
             start();
