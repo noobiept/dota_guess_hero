@@ -44,4 +44,13 @@ export function incorrect()
 
     return show( 'Incorrect :(' );
     }
+
+
+export function restart()
+    {
+    MESSAGE.classList.remove( 'incorrect' );
+    MESSAGE.classList.add( 'correct' );
+
+    return show( 'Restarting..' );
+    }
 }

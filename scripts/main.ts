@@ -35,11 +35,26 @@ export function init()
     CORRECT_SOUND.load();
 
         // build the hero list
-    buildHeroList( document.getElementById( 'StrengthHeroes' )!, Heroes.Strength );
-    buildHeroList( document.getElementById( 'AgilityHeroes' )!, Heroes.Agility );
-    buildHeroList( document.getElementById( 'IntelligenceHeroes' )!, Heroes.Intelligence );
+    buildListByReleaseDate();
 
-    HERO_LIST = document.querySelectorAll( '.hero img' );
+    var listSort = <HTMLSelectElement> document.getElementById( 'ListSort' );
+    listSort.onchange = function()
+        {
+        if ( listSort.value === 'ReleaseDate' )
+            {
+            buildListByReleaseDate();
+            }
+
+        else
+            {
+            buildListAlphabetically();
+            }
+
+            // restart the game after changing the list
+        Message.restart();
+        start();
+        }
+
     AUDIO.volume = 0.3;
     INPUT.oninput = inputListener;
 
@@ -58,7 +73,47 @@ export function init()
 
 
 /**
- * Build the hero list based on the heroes data.
+ * Create a group of heroes to add to the list.
+ */
+function newHeroGroup( heroesInfo: Heroes.Hero[] )
+    {
+    let ul = document.createElement( 'ul' );
+    ul.className = 'heroGroup';
+
+    for (let a = 0 ; a < heroesInfo.length ; a++)
+        {
+        let info = heroesInfo[ a ];
+        let li = document.createElement( 'li' );
+        li.className = 'hero';
+
+        let img = document.createElement( 'img' );
+        img.setAttribute( 'data-name', info.name );
+        img.src = 'http://cdn.dota2.com/apps/dota2/images/heroes/' + info.image;
+        img.onclick = function()
+            {
+            guess( this );
+            };
+
+        if ( info.alternateName )
+            {
+            img.setAttribute( 'data-alternate-name', info.alternateName );
+            }
+
+        let tooltip = document.createElement( 'span' );
+        tooltip.className = 'tooltip';
+        tooltip.textContent = info.name;
+
+        li.appendChild( img );
+        li.appendChild( tooltip );
+        ul.appendChild( li );
+        }
+
+    return ul;
+    }
+
+
+/**
+ * Build the hero list based on the heroes data (in hero release date order).
  */
 function buildHeroList( container: HTMLElement, heroData: Heroes.Hero[][] )
     {
@@ -66,39 +121,90 @@ function buildHeroList( container: HTMLElement, heroData: Heroes.Hero[][] )
     for (let a = 0 ; a < heroData.length ; a++)
         {
         let group = heroData[ a ];
-        let ul = document.createElement( 'ul' );
-        ul.className = 'heroGroup';
-
-        for (let b = 0 ; b < group.length ; b++)
-            {
-            let info = group[ b ];
-            let li = document.createElement( 'li' );
-            li.className = 'hero';
-
-            let img = document.createElement( 'img' );
-            img.setAttribute( 'data-name', info.name );
-            img.src = 'http://cdn.dota2.com/apps/dota2/images/heroes/' + info.image;
-            img.onclick = function()
-                {
-                guess( this );
-                };
-
-            if ( info.alternateName )
-                {
-                img.setAttribute( 'data-alternate-name', info.alternateName );
-                }
-
-            let tooltip = document.createElement( 'span' );
-            tooltip.className = 'tooltip';
-            tooltip.textContent = info.name;
-
-            li.appendChild( img );
-            li.appendChild( tooltip );
-            ul.appendChild( li );
-            }
+        let ul = newHeroGroup( group );
 
         container.appendChild( ul );
         }
+    }
+
+
+/**
+ * Built the hero list in alphabetically order.
+ */
+function buildAlphabeticallyHeroList( container: HTMLElement, heroData: Heroes.Hero[][] )
+    {
+    var heroes: Heroes.Hero[] = [];
+
+        // merge all arrays
+    for (let a = 0 ; a < heroData.length ; a++)
+        {
+        heroes = heroes.concat( heroData[ a ] );
+        }
+
+        // sort alphabetically
+    heroes.sort( function(a, b)
+        {
+        if ( a.name > b.name )
+            {
+            return 1;
+            }
+
+        if ( a.name < b.name )
+            {
+            return -1;
+            }
+
+        return 0;
+        });
+
+        // add the elements
+    let ul = newHeroGroup( heroes );
+    container.appendChild( ul );
+    }
+
+
+/**
+ * Remove the hero list elements.
+ */
+function clearHeroList()
+    {
+    var groups = document.querySelectorAll( '.heroGroup' );
+
+    for (let a = 0 ; a < groups.length ; a++)
+        {
+        let group = groups[ a ];
+        group.parentNode.removeChild( group );
+        }
+    }
+
+
+/**
+ * Build the hero list sorted by release date.
+ */
+function buildListByReleaseDate()
+    {
+    clearHeroList();
+
+    buildHeroList( document.getElementById( 'StrengthHeroes' )!, Heroes.Strength );
+    buildHeroList( document.getElementById( 'AgilityHeroes' )!, Heroes.Agility );
+    buildHeroList( document.getElementById( 'IntelligenceHeroes' )!, Heroes.Intelligence );
+
+    HERO_LIST = document.querySelectorAll( '.hero img' );
+    }
+
+
+/**
+ * Build the hero list sorted alphabetically.
+ */
+function buildListAlphabetically()
+    {
+    clearHeroList();
+
+    buildAlphabeticallyHeroList( document.getElementById( 'StrengthHeroes' )!, Heroes.Strength );
+    buildAlphabeticallyHeroList( document.getElementById( 'AgilityHeroes' )!, Heroes.Agility );
+    buildAlphabeticallyHeroList( document.getElementById( 'IntelligenceHeroes' )!, Heroes.Intelligence );
+
+    HERO_LIST = document.querySelectorAll( '.hero img' );
     }
 
 

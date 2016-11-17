@@ -30,4 +30,10 @@ var Message;
         return show('Incorrect :(');
     }
     Message.incorrect = incorrect;
+    function restart() {
+        MESSAGE.classList.remove('incorrect');
+        MESSAGE.classList.add('correct');
+        return show('Restarting..');
+    }
+    Message.restart = restart;
 })(Message || (Message = {}));
