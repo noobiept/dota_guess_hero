@@ -2,6 +2,9 @@
 window.onload = function () {
     Main.init();
 };
+window.onkeyup = function (event) {
+    return Main.keyboardShortcuts(event);
+};
 var Main;
 (function (Main) {
     var HERO_LIST; // list with all the heroes (what its used to guess the current hero)
@@ -23,7 +26,6 @@ var Main;
         buildHeroList(document.getElementById('IntelligenceHeroes'), Heroes.Intelligence);
         HERO_LIST = document.querySelectorAll('.hero img');
         AUDIO.volume = 0.3;
-        INPUT.onkeyup = inputKeyUp;
         INPUT.oninput = inputListener;
         var help = document.getElementById('Help');
         help.onclick = helpPlayer;
@@ -81,19 +83,6 @@ var Main;
         return null;
     }
     /**
-     * Checks if the `enter` key is pressed if so then it tries to guess the first hero on the list.
-     */
-    function inputKeyUp(event) {
-        var key = event.keyCode;
-        // try to guess the first hero
-        if (key === Utilities.KEY_CODE.enter) {
-            var first = getFirstHero();
-            if (first) {
-                guess(first);
-            }
-        }
-    }
-    /**
      * Filter the list based on the search text.
      */
     function inputListener(event) {
@@ -136,10 +125,18 @@ var Main;
         // only select the first element if there's an actual search value
         if (value !== '') {
             // add a different styling for the first element (the one that is going to be guessed if 'enter' is pressed)
-            SELECTED = getFirstHero();
-            if (SELECTED) {
-                SELECTED.classList.add('selected');
-            }
+            selectHero(getFirstHero());
+        }
+    }
+    /**
+     * Select an hero in the list (add a different styling to it).
+     */
+    function selectHero(hero) {
+        // clear the previous selected element
+        clearSelected();
+        SELECTED = hero;
+        if (hero) {
+            hero.classList.add('selected');
         }
     }
     /**
@@ -266,4 +263,61 @@ var Main;
             INPUT.focus();
         }
     }
+    /**
+     * Select the next/previous valid hero in the hero list.
+     */
+    function moveSelection(next) {
+        // select the first
+        if (!SELECTED) {
+            selectHero(getFirstHero());
+        }
+        else {
+            // find the current position
+            for (var position = 0; position < HERO_LIST.length; position++) {
+                if (HERO_LIST[position] === SELECTED) {
+                    break;
+                }
+            }
+            if (next === true) {
+                for (var a = position + 1; a < HERO_LIST.length; a++) {
+                    var hero = HERO_LIST[a];
+                    if (!hero.classList.contains('invalid')) {
+                        selectHero(hero);
+                        return;
+                    }
+                }
+            }
+            else {
+                for (var a = position - 1; a >= 0; a--) {
+                    var hero = HERO_LIST[a];
+                    if (!hero.classList.contains('invalid')) {
+                        selectHero(hero);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * Global keyboard shortcuts.
+     */
+    function keyboardShortcuts(event) {
+        var key = event.keyCode;
+        switch (key) {
+            case Utilities.KEY_CODE.leftArrow:
+            case Utilities.KEY_CODE.upArrow:
+                moveSelection(false);
+                break;
+            case Utilities.KEY_CODE.rightArrow:
+            case Utilities.KEY_CODE.downArrow:
+                moveSelection(true);
+                break;
+            case Utilities.KEY_CODE.enter:
+                if (SELECTED) {
+                    guess(SELECTED);
+                }
+                break;
+        }
+    }
+    Main.keyboardShortcuts = keyboardShortcuts;
 })(Main || (Main = {}));

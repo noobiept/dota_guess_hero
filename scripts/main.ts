@@ -7,6 +7,12 @@ Main.init();
 };
 
 
+window.onkeyup = function( event )
+{
+return Main.keyboardShortcuts( event );
+};
+
+
 module Main
 {
 var HERO_LIST: NodeListOf<Element>;     // list with all the heroes (what its used to guess the current hero)
@@ -35,7 +41,6 @@ export function init()
 
     HERO_LIST = document.querySelectorAll( '.hero img' );
     AUDIO.volume = 0.3;
-    INPUT.onkeyup = inputKeyUp;
     INPUT.oninput = inputListener;
 
     var help = document.getElementById( 'Help' )!;
@@ -117,26 +122,6 @@ function getFirstHero()
 
 
 /**
- * Checks if the `enter` key is pressed if so then it tries to guess the first hero on the list.
- */
-function inputKeyUp( event: KeyboardEvent )
-    {
-    var key = event.keyCode;
-
-        // try to guess the first hero
-    if ( key === Utilities.KEY_CODE.enter )
-        {
-        var first = getFirstHero();
-
-        if ( first )
-            {
-            guess( first );
-            }
-        }
-    }
-
-
-/**
  * Filter the list based on the search text.
  */
 function inputListener( event: KeyboardEvent )
@@ -199,12 +184,23 @@ function search( value: string )
     if ( value !== '' )
         {
             // add a different styling for the first element (the one that is going to be guessed if 'enter' is pressed)
-        SELECTED = getFirstHero();
+        selectHero( getFirstHero() );
+        }
+    }
 
-        if ( SELECTED )
-            {
-            SELECTED.classList.add( 'selected' );
-            }
+
+/**
+ * Select an hero in the list (add a different styling to it).
+ */
+function selectHero( hero: HTMLElement | null )
+    {
+        // clear the previous selected element
+    clearSelected();
+    SELECTED = hero;
+
+    if ( hero )
+        {
+        hero.classList.add( 'selected' );
         }
     }
 
@@ -391,6 +387,88 @@ function focusInputEntry()
     if ( window.screen.width > 1000 )
         {
         INPUT.focus();
+        }
+    }
+
+
+/**
+ * Select the next/previous valid hero in the hero list.
+ */
+function moveSelection( next: boolean )
+    {
+        // select the first
+    if ( !SELECTED )
+        {
+        selectHero( getFirstHero() );
+        }
+
+    else
+        {
+            // find the current position
+        for (var position = 0 ; position < HERO_LIST.length ; position++)
+            {
+            if ( HERO_LIST[ position ] === SELECTED )
+                {
+                break;
+                }
+            }
+
+        if ( next === true )
+            {
+            for (let a = position + 1 ; a < HERO_LIST.length ; a++)
+                {
+                let hero = HERO_LIST[ a ];
+
+                if ( !hero.classList.contains( 'invalid' ) )
+                    {
+                    selectHero( <HTMLElement> hero );
+                    return;
+                    }
+                }
+            }
+
+        else
+            {
+            for (let a = position - 1 ; a >= 0 ; a--)
+                {
+                let hero = HERO_LIST[ a ];
+
+                if ( !hero.classList.contains( 'invalid' ) )
+                    {
+                    selectHero( <HTMLElement> hero );
+                    return;
+                    }
+                }
+            }
+        }
+    }
+
+
+/**
+ * Global keyboard shortcuts.
+ */
+export function keyboardShortcuts( event: KeyboardEvent )
+    {
+    var key = event.keyCode;
+
+    switch( key )
+        {
+        case Utilities.KEY_CODE.leftArrow:
+        case Utilities.KEY_CODE.upArrow:
+            moveSelection( false );
+            break;
+
+        case Utilities.KEY_CODE.rightArrow:
+        case Utilities.KEY_CODE.downArrow:
+            moveSelection( true );
+            break;
+
+        case Utilities.KEY_CODE.enter:
+            if ( SELECTED )
+                {
+                guess( SELECTED );
+                }
+            break;
         }
     }
 }

@@ -7,6 +7,13 @@ Try to guess the dota hero, based on the sounds being played.
 Click on the hero to make a guess. You can also search for its name on the search entry, to filter the hero list. Press the `enter` key to guess the first element currently on the list.
 
 
+# Keyboard Shortcuts #
+
+- `down/right arrow` - Select the next valid hero in the list.
+- `up/left arrow` - Select the previous valid hero in the list.
+- `enter` - Try to guess the currently selected hero.
+
+
 # Usage #
 
 - `tsc --watch` -- Compiles on file changes.
