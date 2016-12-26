@@ -23,6 +23,7 @@ var SELECTED: HTMLElement | null;       // selected element from the hero search
 
 var HEROES_LEFT: Heroes.Hero[];         // has all the heroes that haven't been played yet
 var CURRENT_HERO: Heroes.Hero;          // current hero that we're trying to guess
+var GAME_OVER = false;                  // to know if the game is over or not
 
 type Sort = 'ReleaseDate' | 'Alphabetically';
 
@@ -337,6 +338,7 @@ function selectHero( hero: HTMLElement | null )
  */
 function start()
     {
+    GAME_OVER = false;
     HEROES_LEFT = Heroes.getAll();
     getNextHero();
     focusInputEntry();
@@ -385,7 +387,10 @@ function getNextHero()
         };
     AUDIO.oncanplay = function()
         {
-        AUDIO.play();
+        if ( !GAME_OVER )
+            {
+            AUDIO.play();
+            }
         };
 
     return true;
@@ -418,11 +423,7 @@ function guess( element: HTMLElement )
 
         if ( !getNextHero() )
             {
-            AUDIO.pause();
-            INPUT.blur();
-            Score.stopScoring();
-
-            Dialog.open( endGameMessage(), start );
+            gameOver();
             }
         }
 
@@ -458,6 +459,20 @@ function resetList()
             element.classList.remove( 'invalid' );
             }
         }
+    }
+
+
+/**
+ * Game has ended, show a dialog with the end message, and then restart the game.
+ */
+function gameOver()
+    {
+    GAME_OVER = true;
+    AUDIO.pause();
+    INPUT.blur();
+    Score.stopScoring();
+
+    Dialog.open( endGameMessage(), start );
     }
 
 
