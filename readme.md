@@ -23,7 +23,7 @@ Click on the hero to make a guess. You can also search for its name on the searc
 
 # Dependencies #
 
-- [typescript](https://www.typescriptlang.org/) `2.0`
+- [typescript](https://www.typescriptlang.org/) `2.1`
 - [utilities](https://bitbucket.org/drk4/javascript_utilities) `1.9`
 
 

@@ -194,7 +194,7 @@ function clearHeroList()
     for (let a = 0 ; a < groups.length ; a++)
         {
         let group = groups[ a ];
-        group.parentNode.removeChild( group );
+        group.parentNode!.removeChild( group );
         }
     }
 

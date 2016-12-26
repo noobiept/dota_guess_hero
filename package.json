@@ -9,6 +9,6 @@
         "grunt-contrib-clean": "~1.0.0",
         "grunt-processhtml": "~0.4.1",
         "grunt-ts": "~5.5.1",
-        "typescript": "~2.0.10"
+        "typescript": "~2.1.4"
     }
 }
