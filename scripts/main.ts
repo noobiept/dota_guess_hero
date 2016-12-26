@@ -278,7 +278,7 @@ function clearSelected()
 function search( value: string )
     {
     try {
-        var re = new RegExp( '^' + value, 'i' );
+        var re = new RegExp( '\\b' + value, 'i' );
     }
 
     catch( error ) {

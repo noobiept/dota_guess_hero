@@ -184,7 +184,7 @@ var Main;
      */
     function search(value) {
         try {
-            var re = new RegExp('^' + value, 'i');
+            var re = new RegExp('\\b' + value, 'i');
         }
         catch (error) {
             return;
